@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>How to Use the Search Feature - My Personal Website</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=1770845352">
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="/index.html">My Website</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/content/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search posts and pages..." autocomplete="off">
+        <div id="search-results"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article>
+            <h1 class="title">How to Use the Search Feature</h1>
+            <p class="date">2026-02-10</p>
+                  
+      <h1 id="how-to-use-the-search-feature">How to Use the Search
+      Feature</h1>
+      <p>The search functionality is one of the most powerful features
+      of this website. Let me show you how to make the most of it.</p>
+      <h2 id="getting-started-with-search">Getting Started with
+      Search</h2>
+      <p>The <strong>large search bar</strong> is prominently displayed
+      at the top of every page. You can’t miss it! Here’s how to use it
+      effectively:</p>
+      <h3 id="basic-search">Basic Search</h3>
+      <p>Simply type your search query into the search bar. As you type,
+      results will appear instantly below the search box.</p>
+      <ul>
+      <li><strong>Minimum 2 characters</strong>: The search activates
+      after you type at least 2 characters</li>
+      <li><strong>Real-time results</strong>: Results update as you
+      type</li>
+      <li><strong>Click to navigate</strong>: Click any result to
+      navigate to that page</li>
+      </ul>
+      <h3 id="what-gets-searched">What Gets Searched?</h3>
+      <p>The search functionality indexes:</p>
+      <ol type="1">
+      <li><strong>Titles</strong>: Post and page titles (highest
+      priority)</li>
+      <li><strong>Content</strong>: The actual text content of posts and
+      pages</li>
+      <li><strong>Tags</strong>: Any tags associated with posts (high
+      priority)</li>
+      </ol>
+      <h3 id="search-tips">Search Tips</h3>
+      <ul>
+      <li><strong>Be specific</strong>: More specific queries return
+      better results</li>
+      <li><strong>Use keywords</strong>: Think about the key terms in
+      what you’re looking for</li>
+      <li><strong>Try different terms</strong>: If you don’t find what
+      you want, try synonyms or related terms</li>
+      </ul>
+      <h3 id="keyboard-shortcuts">Keyboard Shortcuts</h3>
+      <ul>
+      <li><strong>Escape</strong>: Close the search results
+      dropdown</li>
+      <li><strong>Click outside</strong>: The results close
+      automatically when you click elsewhere</li>
+      </ul>
+      <h2 id="technical-details">Technical Details</h2>
+      <p>For the technically curious, here’s how it works:</p>
+      <ul>
+      <li><strong>Lunr.js</strong>: A lightweight, client-side search
+      library</li>
+      <li><strong>JSON Index</strong>: All content is indexed in a
+      single JSON file at build time</li>
+      <li><strong>Instant Search</strong>: No server queries needed -
+      everything runs in your browser</li>
+      <li><strong>Lightweight</strong>: The entire search index is
+      typically just a few KB</li>
+      </ul>
+      <h2 id="privacy">Privacy</h2>
+      <p>Since search runs entirely in your browser:</p>
+      <ul>
+      <li>No search queries are sent to any server</li>
+      <li>No tracking of what you search for</li>
+      <li>Complete privacy</li>
+      </ul>
+      <p>Enjoy searching!</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 My Personal Website. Built with Pandoc and ❤️</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/search.js?v=1770845352"></script>
+</body>
+</html>
