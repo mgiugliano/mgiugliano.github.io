@@ -147,7 +147,7 @@ for pattern in ['index.md', 'content/posts/*.md', 'content/pages/*.md']:
         
         metadata, body = extract_metadata(content)
         
-        # Determine URL (relative to site root)
+        # Determine URL
         if filepath == 'index.md':
             url = 'index.html'
         elif 'posts' in filepath:

@@ -14,8 +14,10 @@
         return match[1];
       }
     }
-    // Fallback: use the current page's directory
-    return window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+    // Fallback: derive from current page location
+    var path = window.location.pathname;
+    var lastSlash = path.lastIndexOf('/');
+    return window.location.origin + (lastSlash > 0 ? path.substring(0, lastSlash) : '');
   }
 
   var siteRoot = getSiteRoot();
@@ -89,7 +91,8 @@
       item.className = 'search-result-item';
       item.addEventListener('click', function() {
         if (result.url) {
-          window.location.href = siteRoot + '/' + result.url;
+          var url = result.url.replace(/^\//, '');
+          window.location.href = siteRoot + '/' + url;
         }
       });
       
