@@ -31,6 +31,7 @@ touch "$OUTPUT_DIR/.nojekyll"
 convert_md_to_html() {
   local input_file="$1"
   local output_file="$2"
+  local root_path="${3:-.}"
   
   echo "  Converting: $input_file -> $output_file"
   
@@ -39,13 +40,14 @@ convert_md_to_html() {
     --standalone \
     --to=html5 \
     --variable="cache_bust:$BUILD_TIMESTAMP" \
+    --variable="root:$root_path" \
     -o "$output_file"
 }
 
 # Convert index page
 if [ -f "index.md" ]; then
   echo "📄 Converting index page..."
-  convert_md_to_html "index.md" "$OUTPUT_DIR/index.html"
+  convert_md_to_html "index.md" "$OUTPUT_DIR/index.html" "."
 fi
 
 # Convert blog posts
@@ -54,7 +56,7 @@ if [ -d "$CONTENT_DIR/posts" ]; then
   for post in "$CONTENT_DIR/posts"/*.md; do
     if [ -f "$post" ]; then
       filename=$(basename "$post" .md)
-      convert_md_to_html "$post" "$OUTPUT_DIR/content/posts/$filename.html"
+      convert_md_to_html "$post" "$OUTPUT_DIR/content/posts/$filename.html" "../.."
     fi
   done
 fi
@@ -65,7 +67,7 @@ if [ -d "$CONTENT_DIR/pages" ]; then
   for page in "$CONTENT_DIR/pages"/*.md; do
     if [ -f "$page" ]; then
       filename=$(basename "$page" .md)
-      convert_md_to_html "$page" "$OUTPUT_DIR/content/pages/$filename.html"
+      convert_md_to_html "$page" "$OUTPUT_DIR/content/pages/$filename.html" "../.."
     fi
   done
 fi
@@ -93,7 +95,7 @@ if [ -d "$CONTENT_DIR/posts" ]; then
       # Extract date from YAML front matter or filename
       date=$(grep "^date:" "$post" | head -1 | sed 's/date: *//; s/"//g' || echo "$filename" | grep -oE '^[0-9]{4}-[0-9]{2}-[0-9]{2}' || echo "")
       
-      echo "## [$title](/content/posts/$filename.html)" >> /tmp/blog-list.md
+      echo "## [$title](content/posts/$filename.html)" >> /tmp/blog-list.md
       if [ -n "$date" ]; then
         echo "*$date*" >> /tmp/blog-list.md
       fi
@@ -102,7 +104,7 @@ if [ -d "$CONTENT_DIR/posts" ]; then
   done
 fi
 
-convert_md_to_html "/tmp/blog-list.md" "$OUTPUT_DIR/blog.html"
+convert_md_to_html "/tmp/blog-list.md" "$OUTPUT_DIR/blog.html" "."
 
 # Generate search index
 echo "🔍 Generating search index..."
@@ -147,13 +149,13 @@ for pattern in ['index.md', 'content/posts/*.md', 'content/pages/*.md']:
         
         # Determine URL
         if filepath == 'index.md':
-            url = '/index.html'
+            url = 'index.html'
         elif 'posts' in filepath:
             filename = os.path.basename(filepath).replace('.md', '.html')
-            url = f'/content/posts/{filename}'
+            url = f'content/posts/{filename}'
         elif 'pages' in filepath:
             filename = os.path.basename(filepath).replace('.md', '.html')
-            url = f'/content/pages/{filename}'
+            url = f'content/pages/{filename}'
         else:
             continue
         

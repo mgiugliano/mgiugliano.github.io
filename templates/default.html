@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>$if(title)$$title$ - $endif$My Personal Website</title>
-  <link rel="stylesheet" href="/static/css/style.css$if(cache_bust)$?v=$cache_bust$$endif$">
+  <link rel="stylesheet" href="$root$/static/css/style.css$if(cache_bust)$?v=$cache_bust$$endif$">
   <script src="https://unpkg.com/lunr/lunr.js"></script>
 </head>
 <body>
@@ -15,12 +15,12 @@
     <div class="container">
       <nav>
         <div class="logo">
-          <a href="/index.html">My Website</a>
+          <a href="$root$/index.html">My Website</a>
         </div>
         <ul class="nav-links">
-          <li><a href="/index.html">Home</a></li>
-          <li><a href="/content/pages/about.html">About</a></li>
-          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="$root$/index.html">Home</a></li>
+          <li><a href="$root$/content/pages/about.html">About</a></li>
+          <li><a href="$root$/blog.html">Blog</a></li>
         </ul>
       </nav>
       <div class="search-container">
@@ -49,6 +49,6 @@
     </div>
   </footer>
 
-  <script src="/static/js/search.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
+  <script src="$root$/static/js/search.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
 </body>
 </html>
