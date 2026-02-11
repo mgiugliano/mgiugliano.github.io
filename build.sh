@@ -9,6 +9,8 @@ TEMPLATE="templates/default.html"
 OUTPUT_DIR="docs"
 CONTENT_DIR="content"
 STATIC_DIR="static"
+# Generate timestamp for cache busting
+BUILD_TIMESTAMP=$(date +%s)
 
 echo "🚀 Building personal website..."
 
@@ -21,6 +23,10 @@ mkdir -p "$OUTPUT_DIR/content/posts" "$OUTPUT_DIR/content/pages"
 echo "📦 Copying static files..."
 cp -r "$STATIC_DIR" "$OUTPUT_DIR/"
 
+# Create .nojekyll file to prevent Jekyll processing
+echo "🔧 Creating .nojekyll file..."
+touch "$OUTPUT_DIR/.nojekyll"
+
 # Function to convert markdown to HTML
 convert_md_to_html() {
   local input_file="$1"
@@ -32,6 +38,7 @@ convert_md_to_html() {
     --template="$TEMPLATE" \
     --standalone \
     --to=html5 \
+    --variable="cache_bust:$BUILD_TIMESTAMP" \
     -o "$output_file"
 }
 

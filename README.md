@@ -251,12 +251,35 @@ code block
 
 ## Troubleshooting
 
+## Troubleshooting
+
 ### Site not updating after push
 
-1. Check the Actions tab for build errors
-2. Ensure the workflow completed successfully
-3. Wait a few minutes for GitHub Pages to update
-4. Clear your browser cache
+If your site is not updating after pushing changes to GitHub:
+
+1. **Check that changes are on the main branch**
+   - The GitHub Actions workflow only deploys from the `main` branch
+   - Changes in feature branches won't appear until merged to `main`
+   - To merge: Create a Pull Request and merge it to `main`
+
+2. **Check the Actions tab for build errors**
+   - Go to your repository's "Actions" tab
+   - Look for the "Deploy to GitHub Pages" workflow
+   - Click on the latest run to see if there were any errors
+
+3. **Wait a few minutes for GitHub Pages to update**
+   - After a successful deployment, GitHub Pages may take 1-5 minutes to update
+   - The workflow shows "success" but the CDN needs time to propagate changes
+
+4. **Clear your browser cache**
+   - Hard refresh: Ctrl+Shift+R (Windows/Linux) or Cmd+Shift+R (Mac)
+   - Or open the site in a private/incognito window
+   - The site now includes cache-busting headers to prevent this issue
+
+5. **Verify GitHub Pages settings**
+   - Go to Settings > Pages in your repository
+   - Source should be set to "GitHub Actions"
+   - If it's set to "Deploy from a branch", change it to "GitHub Actions"
 
 ### Search not working
 
