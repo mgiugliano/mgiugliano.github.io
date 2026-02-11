@@ -6,8 +6,8 @@
   // Load search index
   async function loadSearchIndex() {
     try {
-      // Add cache-busting parameter
-      const cacheBust = new URLSearchParams(window.location.search).get('v') || Date.now();
+      // Add cache-busting parameter using current timestamp
+      const cacheBust = Date.now();
       const response = await fetch(`/search-index.json?v=${cacheBust}`);
       const data = await response.json();
       searchData = data;

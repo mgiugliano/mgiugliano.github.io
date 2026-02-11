@@ -251,8 +251,6 @@ code block
 
 ## Troubleshooting
 
-## Troubleshooting
-
 ### Site not updating after push
 
 If your site is not updating after pushing changes to GitHub:
