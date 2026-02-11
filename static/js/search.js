@@ -44,6 +44,13 @@
     }
   }
 
+  // Escape HTML to prevent XSS
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   // Display search results
   function displayResults(results) {
     const resultsContainer = document.getElementById('search-results');
@@ -55,11 +62,15 @@
     }
 
     const html = results.map(result => {
-      const excerpt = result.content.substring(0, 150) + '...';
+      const excerpt = result.content.substring(0, 150) + (result.content.length > 150 ? '...' : '');
+      const safeUrl = escapeHtml(result.url);
+      const safeTitle = escapeHtml(result.title);
+      const safeExcerpt = escapeHtml(excerpt);
+      
       return `
-        <div class="search-result-item" onclick="window.location.href='${result.url}'">
-          <div class="search-result-title">${result.title}</div>
-          <div class="search-result-excerpt">${excerpt}</div>
+        <div class="search-result-item" onclick="window.location.href='${safeUrl}'">
+          <div class="search-result-title">${safeTitle}</div>
+          <div class="search-result-excerpt">${safeExcerpt}</div>
         </div>
       `;
     }).join('');
