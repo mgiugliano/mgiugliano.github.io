@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>$if(title)$$title$ - $endif$My Personal Website</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="/index.html">My Website</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/content/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search posts and pages..." autocomplete="off">
+        <div id="search-results"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article>
+      $if(title)$
+      <h1 class="title">$title$</h1>
+      $if(date)$
+      <p class="date">$date$</p>
+      $endif$
+      $endif$
+      
+      $body$
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 My Personal Website. Built with Pandoc and ❤️</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/search.js"></script>
+</body>
+</html>
