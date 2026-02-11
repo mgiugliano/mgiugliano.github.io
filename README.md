@@ -126,7 +126,7 @@ Edit `templates/default.html`:
 
 ```html
 <div class="logo">
-  <a href="/index.html">Your Name Here</a>
+  <a href="$root$/index.html">Your Name Here</a>
 </div>
 ```
 
@@ -142,12 +142,14 @@ Edit the navigation section in `templates/default.html`:
 
 ```html
 <ul class="nav-links">
-  <li><a href="/index.html">Home</a></li>
-  <li><a href="/content/pages/about.html">About</a></li>
-  <li><a href="/blog.html">Blog</a></li>
-  <li><a href="/content/pages/contact.html">Contact</a></li> <!-- Add new links -->
+  <li><a href="$root$/index.html">Home</a></li>
+  <li><a href="$root$/content/pages/about.html">About</a></li>
+  <li><a href="$root$/blog.html">Blog</a></li>
+  <li><a href="$root$/content/pages/contact.html">Contact</a></li> <!-- Add new links -->
 </ul>
 ```
+
+> **Note:** The `$root$` variable is a Pandoc template variable that resolves to a relative path (e.g., `.` for root pages, `../..` for nested pages). This ensures links work correctly regardless of the deployment URL.
 
 ### Customizing Styles
 
@@ -190,13 +192,17 @@ Edit the footer section in `templates/default.html`:
 
 ## Deployment
 
+This site is deployed via **GitHub Actions**. The `deploy.yml` workflow runs `build.sh` to generate the site into the `docs/` directory, then uploads `docs/` as the deployment artifact. **GitHub Pages serves the contents of `docs/` as the site root** (e.g., `docs/index.html` → `https://<username>.github.io/index.html`).
+
 ### GitHub Pages Setup (First Time)
 
-1. Go to your repository Settings
-2. Navigate to "Pages" section
-3. Under "Build and deployment":
-   - Source: GitHub Actions
-4. The workflow will run automatically on every push to main
+1. Go to your repository **Settings**
+2. Navigate to the **"Pages"** section
+3. Under **"Build and deployment"**:
+   - **Source: GitHub Actions** ← this is required
+4. The workflow runs automatically on every push to `main`
+
+> ⚠️ **Important:** Do _not_ set Pages to "Deploy from a branch". The site is built and deployed by the GitHub Actions workflow defined in `.github/workflows/deploy.yml`. Setting the source to anything other than "GitHub Actions" will prevent the workflow from deploying correctly.
 
 ### Manual Deployment Trigger
 
