@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>$if(title)$$title$ - $endif$My Personal Website</title>
-  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/style.css$if(cache_bust)$?v=$cache_bust$$endif$">
   <script src="https://unpkg.com/lunr/lunr.js"></script>
 </head>
 <body>
@@ -46,6 +49,6 @@
     </div>
   </footer>
 
-  <script src="/static/js/search.js"></script>
+  <script src="/static/js/search.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
 </body>
 </html>

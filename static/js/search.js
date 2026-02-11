@@ -6,7 +6,9 @@
   // Load search index
   async function loadSearchIndex() {
     try {
-      const response = await fetch('/search-index.json');
+      // Add cache-busting parameter using current timestamp
+      const cacheBust = Date.now();
+      const response = await fetch(`/search-index.json?v=${cacheBust}`);
       const data = await response.json();
       searchData = data;
 
