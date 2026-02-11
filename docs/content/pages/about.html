@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>About - My Personal Website</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=1770845471">
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="/index.html">My Website</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/content/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search posts and pages..." autocomplete="off">
+        <div id="search-results"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article>
+            <h1 class="title">About</h1>
+                  
+      <h1 id="about-this-website">About This Website</h1>
+      <p>This is a minimalistic, self-contained personal website system
+      built with simplicity and functionality in mind.</p>
+      <h2 id="the-philosophy">The Philosophy</h2>
+      <p>The goal of this website is to provide:</p>
+      <ul>
+      <li><strong>Simplicity</strong>: Clean, distraction-free reading
+      experience</li>
+      <li><strong>Speed</strong>: Fast-loading static pages</li>
+      <li><strong>Searchability</strong>: Powerful search to find
+      content instantly</li>
+      <li><strong>Maintainability</strong>: Easy to update and
+      manage</li>
+      </ul>
+      <h2 id="how-it-works">How It Works</h2>
+      <h3 id="technology-stack">Technology Stack</h3>
+      <ul>
+      <li><strong>Pandoc</strong>: Converts Markdown files to beautiful
+      HTML</li>
+      <li><strong>Lunr.js</strong>: Provides fast, client-side search
+      functionality</li>
+      <li><strong>GitHub Pages</strong>: Hosts the static site for
+      free</li>
+      <li><strong>GitHub Actions</strong>: Automatically builds and
+      deploys on every push</li>
+      </ul>
+      <h3 id="architecture">Architecture</h3>
+      <p>The site is built from:</p>
+      <ol type="1">
+      <li><strong>Markdown Content</strong>: All posts and pages are
+      written in simple Markdown</li>
+      <li><strong>Pandoc Templates</strong>: HTML templates define the
+      site structure and styling</li>
+      <li><strong>Build Script</strong>: Bash script that converts
+      Markdown to HTML and generates search index</li>
+      <li><strong>Static Assets</strong>: CSS and JavaScript for styling
+      and interactivity</li>
+      </ol>
+      <h3 id="workflow">Workflow</h3>
+      <ol type="1">
+      <li>Edit Markdown files directly on GitHub</li>
+      <li>Push changes to the main branch</li>
+      <li>GitHub Actions automatically builds the site</li>
+      <li>Updated site is deployed to GitHub Pages</li>
+      </ol>
+      <p>No local development environment needed - though you can run it
+      locally if you prefer!</p>
+      <h2 id="features">Features</h2>
+      <h3 id="large-prominent-search">Large, Prominent Search</h3>
+      <p>The search bar is designed to be highly visible and easy to
+      use:</p>
+      <ul>
+      <li>Appears at the top of every page</li>
+      <li>Provides instant results as you type</li>
+      <li>Searches across all content (posts, pages, tags)</li>
+      <li>Privacy-focused (runs entirely in your browser)</li>
+      </ul>
+      <h3 id="blog-posts">Blog Posts</h3>
+      <p>Blog posts are stored in <code>content/posts/</code> with
+      date-based naming:</p>
+      <ul>
+      <li>Format: <code>YYYY-MM-DD-title.md</code></li>
+      <li>Supports YAML front matter for metadata</li>
+      <li>Automatically listed on the blog page</li>
+      <li>Fully searchable</li>
+      </ul>
+      <h3 id="static-pages">Static Pages</h3>
+      <p>Create any number of static pages in
+      <code>content/pages/</code>:</p>
+      <ul>
+      <li>Custom URLs based on filename</li>
+      <li>Same Markdown format as blog posts</li>
+      <li>Can be linked in navigation</li>
+      </ul>
+      <h3 id="responsive-design">Responsive Design</h3>
+      <p>The site looks great on all devices:</p>
+      <ul>
+      <li>Mobile-friendly layout</li>
+      <li>Readable typography</li>
+      <li>Touch-friendly interface</li>
+      </ul>
+      <h2 id="open-source">Open Source</h2>
+      <p>This website system is built to be:</p>
+      <ul>
+      <li>Self-contained</li>
+      <li>Easy to understand</li>
+      <li>Simple to modify</li>
+      <li>Free to use</li>
+      </ul>
+      <p>Feel free to explore the code and adapt it for your own
+      use!</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 My Personal Website. Built with Pandoc and ❤️</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/search.js?v=1770845471"></script>
+</body>
+</html>

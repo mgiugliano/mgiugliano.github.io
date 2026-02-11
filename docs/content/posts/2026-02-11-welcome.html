@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Welcome to My New Website - My Personal Website</title>
+  <link rel="stylesheet" href="/static/css/style.css?v=1770845471">
+  <script src="https://unpkg.com/lunr/lunr.js"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="/index.html">My Website</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/content/pages/about.html">About</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+        </ul>
+      </nav>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search posts and pages..." autocomplete="off">
+        <div id="search-results"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article>
+            <h1 class="title">Welcome to My New Website</h1>
+            <p class="date">2026-02-11</p>
+                  
+      <h1 id="welcome-to-my-new-website">Welcome to My New Website</h1>
+      <p>I’m excited to announce the launch of my new personal website!
+      This site is built with a minimalistic approach, focusing on
+      content and ease of use.</p>
+      <h2 id="whats-new">What’s New?</h2>
+      <h3 id="clean-design">Clean Design</h3>
+      <p>The website features a clean, minimalistic design with:</p>
+      <ul>
+      <li>Generous white space for better readability</li>
+      <li>Responsive layout that works on all devices</li>
+      <li>Clear typography and comfortable line spacing</li>
+      </ul>
+      <h3 id="powerful-search">Powerful Search</h3>
+      <p>One of the standout features is the <strong>large, prominent
+      search bar</strong> at the top of every page. You can quickly find
+      any content across all blog posts and pages using keywords.</p>
+      <h3 id="easy-content-management">Easy Content Management</h3>
+      <p>All content is written in Markdown and stored in the
+      repository. To add a new blog post:</p>
+      <ol type="1">
+      <li>Create a new <code>.md</code> file in
+      <code>content/posts/</code></li>
+      <li>Use the naming format: <code>YYYY-MM-DD-title.md</code></li>
+      <li>Add YAML front matter with title, date, and tags</li>
+      <li>Write your content in Markdown</li>
+      <li>Push to GitHub - the site rebuilds automatically!</li>
+      </ol>
+      <h2 id="built-with">Built With</h2>
+      <ul>
+      <li><strong>Pandoc</strong>: Converts Markdown to beautiful
+      HTML</li>
+      <li><strong>Lunr.js</strong>: Powers the client-side search
+      functionality</li>
+      <li><strong>GitHub Pages</strong>: Free, reliable hosting</li>
+      <li><strong>GitHub Actions</strong>: Automatic deployment on every
+      push</li>
+      </ul>
+      <h2 id="whats-next">What’s Next?</h2>
+      <p>I plan to write about:</p>
+      <ul>
+      <li>Web development techniques and best practices</li>
+      <li>Technology thoughts and reviews</li>
+      <li>Personal projects and experiments</li>
+      </ul>
+      <p>Stay tuned for more content!</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 My Personal Website. Built with Pandoc and ❤️</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/search.js?v=1770845471"></script>
+</body>
+</html>

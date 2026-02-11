@@ -1,6 +1,3 @@
-# Build artifacts
-docs/
-
 # Python
 __pycache__/
 *.py[cod]
