@@ -65,19 +65,33 @@
 
     const html = results.map(result => {
       const excerpt = result.content.substring(0, 150) + (result.content.length > 150 ? '...' : '');
-      const safeUrl = escapeHtml(result.url);
       const safeTitle = escapeHtml(result.title);
       const safeExcerpt = escapeHtml(excerpt);
       
-      return `
-        <div class="search-result-item" onclick="window.location.href='${safeUrl}'">
-          <div class="search-result-title">${safeTitle}</div>
-          <div class="search-result-excerpt">${safeExcerpt}</div>
-        </div>
-      `;
-    }).join('');
+      const item = document.createElement('div');
+      item.className = 'search-result-item';
+      item.addEventListener('click', function() {
+        if (result.url && /^\/[a-zA-Z0-9]/.test(result.url)) {
+          window.location.href = result.url;
+        }
+      });
+      
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'search-result-title';
+      titleDiv.textContent = result.title;
+      
+      const excerptDiv = document.createElement('div');
+      excerptDiv.className = 'search-result-excerpt';
+      excerptDiv.textContent = excerpt;
+      
+      item.appendChild(titleDiv);
+      item.appendChild(excerptDiv);
+      
+      return item;
+    });
 
-    resultsContainer.innerHTML = html;
+    resultsContainer.innerHTML = '';
+    html.forEach(item => resultsContainer.appendChild(item));
     resultsContainer.classList.add('active');
   }
 
