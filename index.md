@@ -27,4 +27,4 @@ This website is:
 
 Use the search bar above to find content, or explore the navigation menu to discover blog posts and pages.
 
-Check out the [Blog](/blog.html) to see the latest posts, or learn more [About](/content/pages/about.html) this site.
+Check out the [Blog](blog.html) to see the latest posts, or learn more [About](content/pages/about.html) this site.

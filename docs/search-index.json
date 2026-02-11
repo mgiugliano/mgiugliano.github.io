@@ -1,27 +1,27 @@
 [
   {
-    "url": "/index.html",
+    "url": "index.html",
     "title": "Welcome",
     "content": "Welcome to My Personal Website\n\nHello! This is a minimalistic personal website built with Pandoc, featuring a powerful search functionality.\n\nAbout This Site\n\nThis website is:\n\n- Minimalistic: Clean design with generous white space\n- Fast: Static site generated with Pandoc\n- Searchable: Large, prominent search bar powered by Lunr.js\n- Easy to Maintain: Edit Markdown files directly on GitHub, automatic deployment\n\nFeatures\n\n- \ud83d\udcdd Blog Posts: Share your thoughts and ideas\n- \ud83d\udcc4 Static Pages: Create ab",
     "tags": "",
     "date": ""
   },
   {
-    "url": "/content/posts/2026-02-10-search-tutorial.html",
+    "url": "content/posts/2026-02-10-search-tutorial.html",
     "title": "How to Use the Search Feature",
     "content": "How to Use the Search Feature\n\nThe search functionality is one of the most powerful features of this website. Let me show you how to make the most of it.\n\nGetting Started with Search\n\nThe large search bar is prominently displayed at the top of every page. You can't miss it! Here's how to use it effectively:\n\nBasic Search\n\nSimply type your search query into the search bar. As you type, results will appear instantly below the search box.\n\n- Minimum 2 characters: The search activates after you type",
     "tags": "tutorial, search, features",
     "date": "2026-02-10"
   },
   {
-    "url": "/content/posts/2026-02-11-welcome.html",
+    "url": "content/posts/2026-02-11-welcome.html",
     "title": "Welcome to My New Website",
     "content": "Welcome to My New Website\n\nI'm excited to announce the launch of my new personal website! This site is built with a minimalistic approach, focusing on content and ease of use.\n\nWhat's New?\n\nClean Design\n\nThe website features a clean, minimalistic design with:\n\n- Generous white space for better readability\n- Responsive layout that works on all devices\n- Clear typography and comfortable line spacing\n\nPowerful Search\n\nOne of the standout features is the large, prominent search bar at the top of eve",
     "tags": "announcement, website",
     "date": "2026-02-11"
   },
   {
-    "url": "/content/pages/about.html",
+    "url": "content/pages/about.html",
     "title": "About",
     "content": "About This Website\n\nThis is a minimalistic, self-contained personal website system built with simplicity and functionality in mind.\n\nThe Philosophy\n\nThe goal of this website is to provide:\n\n- Simplicity: Clean, distraction-free reading experience\n- Speed: Fast-loading static pages\n- Searchability: Powerful search to find content instantly\n- Maintainability: Easy to update and manage\n\nHow It Works\n\nTechnology Stack\n\n- Pandoc: Converts Markdown files to beautiful HTML\n- Lunr.js: Provides fast, cli",
     "tags": "",

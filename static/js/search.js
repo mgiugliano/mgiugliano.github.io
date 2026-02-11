@@ -3,12 +3,29 @@
   let searchIndex = null;
   let searchData = [];
 
+  // Determine the site root from the search.js script location
+  // The script is at <root>/static/js/search.js
+  function getSiteRoot() {
+    var scripts = document.getElementsByTagName('script');
+    for (var i = 0; i < scripts.length; i++) {
+      var src = scripts[i].src;
+      var match = src.match(/^(.*?)\/static\/js\/search\.js/);
+      if (match) {
+        return match[1];
+      }
+    }
+    // Fallback: use the current page's directory
+    return window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+  }
+
+  var siteRoot = getSiteRoot();
+
   // Load search index
   async function loadSearchIndex() {
     try {
       // Add cache-busting parameter using current timestamp
       const cacheBust = Date.now();
-      const response = await fetch(`/search-index.json?v=${cacheBust}`);
+      const response = await fetch(`${siteRoot}/search-index.json?v=${cacheBust}`);
       const data = await response.json();
       searchData = data;
 
@@ -71,8 +88,8 @@
       const item = document.createElement('div');
       item.className = 'search-result-item';
       item.addEventListener('click', function() {
-        if (result.url && /^\/[a-zA-Z0-9]/.test(result.url)) {
-          window.location.href = result.url;
+        if (result.url) {
+          window.location.href = siteRoot + '/' + result.url;
         }
       });
       
