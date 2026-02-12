@@ -4,9 +4,7 @@ title: Welcome
 
 # Were you perhaps looking for these websites?
 
-- [Home Page](https://www.giugliano.info)
-- [Lab Page](https://www.giugliano.info/lab)
-- [CV](https://www.giugliano.info/cv)
+- [Home Page](https://www.giugliano.info)    [Lab Page](https://www.giugliano.info/lab)   [CV](https://www.giugliano.info/cv)
 
 - **UNIMORE** - [Colloquia](https://mgiugliano.github.io/colloquia/)
 - **UNIMORE** - [ModellingNeuralSystems](https://mgiugliano.github.io/ModellingNeuralSystems)
