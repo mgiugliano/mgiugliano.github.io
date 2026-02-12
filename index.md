@@ -2,18 +2,19 @@
 title: Ciao
 ---
 
-# Looking perhaps for these?
+# Looking for these?
 
 - [Home Page](https://www.giugliano.info)
 - [Lab Page](https://www.giugliano.info/lab)
 - [CV](https://www.giugliano.info/cv)
+- [YouTube](youtube.com/@michele_giugliano)
 
 - **UNIMORE** - [Colloquia](https://mgiugliano.github.io/colloquia/) course website
 - **UNIMORE** - [ModellingNeuralSystems](https://mgiugliano.github.io/ModellingNeuralSystems) course website
 - **UNIMORE** - [ePhysSignals](https://mgiugliano.github.io/ePhysSignals) course website
 
 
-# Otherwise... you landed to my _blurbs_ 
+# Otherwise... here are _blurbs_ 
 
 This is a minimal landing page (built with Pandoc and featuring a quick search). Use the search bar above to find content, or explore the navigation menu to discover blog posts and pages.
 
