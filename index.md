@@ -17,3 +17,5 @@ title: Ciao
 This is a minimal landing page (built with Pandoc and featuring a quick search). Use the search bar above to find content, or explore the navigation menu to discover blog posts and pages.
 
 Check out the [Blog](blog.html) to see the latest posts, or learn more [About](content/pages/about.html) this site.
+
+<!-- BLOG_ENTRIES -->
