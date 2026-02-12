@@ -44,10 +44,50 @@ convert_md_to_html() {
     -o "$output_file"
 }
 
-# Convert index page
+# Convert index page (with blog entries injected)
 if [ -f "index.md" ]; then
   echo "📄 Converting index page..."
-  convert_md_to_html "index.md" "$OUTPUT_DIR/index.html" "."
+  
+  # Generate blog entries markdown for inline inclusion
+  BLOG_ENTRIES=""
+  if [ -d "$CONTENT_DIR/posts" ]; then
+    for post in $(ls -r "$CONTENT_DIR/posts"/*.md 2>/dev/null); do
+      if [ -f "$post" ]; then
+        filename=$(basename "$post" .md)
+        title=$(grep "^title:" "$post" | head -1 | sed 's/title: *//; s/"//g' || echo "$filename")
+        date=$(grep "^date:" "$post" | head -1 | sed 's/date: *//; s/"//g' || echo "$filename" | grep -oE '^[0-9]{4}-[0-9]{2}-[0-9]{2}' || echo "")
+        BLOG_ENTRIES="${BLOG_ENTRIES}## [$title](content/posts/$filename.html)"$'\n'
+        if [ -n "$date" ]; then
+          BLOG_ENTRIES="${BLOG_ENTRIES}*$date*"$'\n'
+        fi
+        BLOG_ENTRIES="${BLOG_ENTRIES}"$'\n'
+      fi
+    done
+  fi
+
+  # Create a temporary copy of index.md with blog entries injected
+  cp index.md /tmp/index-with-blogs.md
+  # Replace the placeholder with actual blog entries
+  if [ -n "$BLOG_ENTRIES" ]; then
+    # Write blog entries to a temp file and use sed to replace
+    BLOG_SECTION="# Recent Posts"$'\n\n'"$BLOG_ENTRIES"
+    printf '%s' "$BLOG_SECTION" > /tmp/blog-entries-fragment.md
+    python3 -c "
+import sys
+with open('/tmp/index-with-blogs.md', 'r') as f:
+    content = f.read()
+with open('/tmp/blog-entries-fragment.md', 'r') as f:
+    entries = f.read()
+content = content.replace('<!-- BLOG_ENTRIES -->', entries)
+with open('/tmp/index-with-blogs.md', 'w') as f:
+    f.write(content)
+"
+  else
+    # No blog entries, just remove the placeholder
+    sed -i 's/<!-- BLOG_ENTRIES -->//' /tmp/index-with-blogs.md
+  fi
+
+  convert_md_to_html "/tmp/index-with-blogs.md" "$OUTPUT_DIR/index.html" "."
 fi
 
 # Convert blog posts
@@ -133,6 +173,7 @@ def extract_metadata(content):
 
 def strip_markdown(text):
     """Remove markdown formatting"""
+    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
     text = re.sub(r'#+ ', '', text)
     text = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
     text = re.sub(r'[*_`]', '', text)
