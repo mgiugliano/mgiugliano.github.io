@@ -6,8 +6,6 @@ tags: web, snippet
 
 # Conf-calls static link: How to?
 
-I'm excited to announce the launch of my new personal website! This site is built with a minimalistic approach, focusing on content and ease of use.
-
 ## Zoom’s Personal Meeting Room
 
 I love Zoom’s Personal Meeting Room: every user has a dedicated url link that is permanent and never changing. I can then use it, share it, email it, write it over and over, e.g. upfront on email signatures, on recurring calendar shared events, in online appointment booking systems (like [Calendly](https://www.giugliano.info/cv/blog/quick-confcall-link/calendly.com)), etc.
