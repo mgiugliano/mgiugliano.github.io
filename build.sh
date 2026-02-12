@@ -113,6 +113,7 @@ import json
 import os
 import re
 import glob
+import sys
 
 def extract_metadata(content):
     """Extract YAML front matter from markdown"""
@@ -137,46 +138,59 @@ def strip_markdown(text):
     text = re.sub(r'[*_`]', '', text)
     return text.strip()
 
-search_index = []
+try:
+    search_index = []
 
-# Index all markdown files
-for pattern in ['index.md', 'content/posts/*.md', 'content/pages/*.md']:
-    for filepath in glob.glob(pattern):
-        with open(filepath, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        metadata, body = extract_metadata(content)
-        
-        # Determine URL
-        if filepath == 'index.md':
-            url = 'index.html'
-        elif 'posts' in filepath:
-            filename = os.path.basename(filepath).replace('.md', '.html')
-            url = f'content/posts/{filename}'
-        elif 'pages' in filepath:
-            filename = os.path.basename(filepath).replace('.md', '.html')
-            url = f'content/pages/{filename}'
-        else:
-            continue
-        
-        # Clean content for search
-        clean_content = strip_markdown(body)
-        
-        search_index.append({
-            'url': url,
-            'title': metadata.get('title', os.path.basename(filepath)),
-            'content': clean_content[:500],  # First 500 chars
-            'tags': metadata.get('tags', ''),
-            'date': metadata.get('date', '')
-        })
+    # Index all markdown files
+    for pattern in ['index.md', 'content/posts/*.md', 'content/pages/*.md']:
+        for filepath in glob.glob(pattern):
+            with open(filepath, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            metadata, body = extract_metadata(content)
+            
+            # Determine URL
+            if filepath == 'index.md':
+                url = 'index.html'
+            elif 'posts' in filepath:
+                filename = os.path.basename(filepath).replace('.md', '.html')
+                url = f'content/posts/{filename}'
+            elif 'pages' in filepath:
+                filename = os.path.basename(filepath).replace('.md', '.html')
+                url = f'content/pages/{filename}'
+            else:
+                continue
+            
+            # Clean content for search
+            clean_content = strip_markdown(body)
+            
+            search_index.append({
+                'url': url,
+                'title': metadata.get('title', os.path.basename(filepath)),
+                'content': clean_content[:500],  # First 500 chars
+                'tags': metadata.get('tags', ''),
+                'date': metadata.get('date', '')
+            })
 
-# Write search index
-with open('docs/search-index.json', 'w', encoding='utf-8') as f:
-    json.dump(search_index, f, indent=2)
+    # Write search index
+    with open('docs/search-index.json', 'w', encoding='utf-8') as f:
+        json.dump(search_index, f, indent=2)
 
-print(f"  Indexed {len(search_index)} documents")
+    print(f"  Indexed {len(search_index)} documents")
+    
+except Exception as e:
+    print(f"  ERROR: Failed to generate search index: {e}", file=sys.stderr)
+    sys.exit(1)
 
 PYTHON_SCRIPT
+
+# Verify search index was created
+if [ ! -f "docs/search-index.json" ]; then
+  echo "❌ ERROR: Search index was not created!"
+  exit 1
+fi
+
+echo "  ✓ Search index created successfully at docs/search-index.json"
 
 echo "✅ Build complete! Site generated in '$OUTPUT_DIR/' directory"
 echo ""

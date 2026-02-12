@@ -33,10 +33,23 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install jq for JSON processing
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Build site
         run: |
           chmod +x build.sh
           ./build.sh
+
+      - name: Verify search index was created
+        run: |
+          if [ ! -f "./docs/search-index.json" ]; then
+            echo "❌ ERROR: Search index not found!"
+            exit 1
+          fi
+          echo "✅ Search index verified at ./docs/search-index.json"
+          echo "📊 Search index size: $(wc -c < ./docs/search-index.json) bytes"
+          echo "📝 Number of indexed documents: $(jq '. | length' ./docs/search-index.json)"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
