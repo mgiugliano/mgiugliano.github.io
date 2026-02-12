@@ -167,7 +167,7 @@ try:
             search_index.append({
                 'url': url,
                 'title': metadata.get('title', os.path.basename(filepath)),
-                'content': clean_content[:500],  # First 500 chars
+                'content': clean_content,
                 'tags': metadata.get('tags', ''),
                 'date': metadata.get('date', '')
             })
