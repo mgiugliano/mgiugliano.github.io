@@ -2,29 +2,20 @@
 title: Welcome
 ---
 
-# Welcome to My Personal Website
+# Are you perhaps looking for these websites?
 
-Hello! This is a minimalistic personal website built with Pandoc, featuring a powerful search functionality.
+- [Home Page](https://www.giugliano.info)
+- [Lab Page](https://www.giugliano.info/lab)
+- [CV](https://www.giugliano.info/cv)
 
-## About This Site
+- **UNIMORE** - [Colloquia](https://mgiugliano.github.io/colloquia/)
+- **UNIMORE** - [ModelingNeuralSystems](https://mgiugliano.github.io/ModelingNeuralSystems)
+- **UNIMORE** - [ePhysSignals](https://mgiugliano.github.io/ePhysSignals)
 
-This website is:
 
-- **Minimalistic**: Clean design with generous white space
-- **Fast**: Static site generated with Pandoc
-- **Searchable**: Large, prominent search bar powered by Lunr.js
-- **Easy to Maintain**: Edit Markdown files directly on GitHub, automatic deployment
+# Welcome to _blurb_ page
 
-## Features
-
-- 📝 **Blog Posts**: Share your thoughts and ideas
-- 📄 **Static Pages**: Create about, contact, or any custom pages
-- 🔍 **Search**: Find content quickly with the search bar
-- 📱 **Responsive**: Works beautifully on all devices
-- 🚀 **Auto-Deploy**: Push to GitHub and your site updates automatically
-
-## Getting Started
-
+Hello! This is a minimalistic landing page, built with Pandoc, featuring a quick search functionality.
 Use the search bar above to find content, or explore the navigation menu to discover blog posts and pages.
 
 Check out the [Blog](blog.html) to see the latest posts, or learn more [About](content/pages/about.html) this site.
