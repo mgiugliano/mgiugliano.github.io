@@ -8,7 +8,7 @@
   <meta http-equiv="Expires" content="0">
   <title>$if(title)$$title$ - $endif$My Personal Website</title>
   <link rel="stylesheet" href="$root$/static/css/style.css$if(cache_bust)$?v=$cache_bust$$endif$">
-  <script src="$root$/static/js/lunr.min.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
+  <script src="$root$/static/js/fuse.min.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
 </head>
 <body>
   <header>
@@ -22,6 +22,9 @@
           <li><a href="$root$/content/pages/about.html">About</a></li>
           <li><a href="$root$/blog.html">Blog</a></li>
         </ul>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark/light theme" title="Toggle dark/light theme">
+          <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        </button>
       </nav>
       <div class="search-container">
         <input type="text" id="search-input" placeholder="Search posts and pages..." autocomplete="off">
@@ -50,5 +53,6 @@
   </footer>
 
   <script src="$root$/static/js/search.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
+  <script src="$root$/static/js/theme.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
 </body>
 </html>

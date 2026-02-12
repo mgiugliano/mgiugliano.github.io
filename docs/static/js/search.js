@@ -1,6 +1,6 @@
-// Search functionality using Lunr.js
+// Search functionality using Fuse.js (fuzzy search)
 (function() {
-  let searchIndex = null;
+  let fuse = null;
   let searchData = [];
 
   // Determine the site root from the search.js script location
@@ -31,16 +31,17 @@
       const data = await response.json();
       searchData = data;
 
-      // Build Lunr index
-      searchIndex = lunr(function() {
-        this.ref('url');
-        this.field('title', { boost: 10 });
-        this.field('content');
-        this.field('tags', { boost: 5 });
-
-        data.forEach(doc => {
-          this.add(doc);
-        });
+      // Build Fuse.js index with fuzzy search options
+      fuse = new Fuse(data, {
+        keys: [
+          { name: 'title', weight: 10 },
+          { name: 'tags', weight: 5 },
+          { name: 'content', weight: 1 }
+        ],
+        threshold: 0.4,
+        distance: 200,
+        includeScore: true,
+        minMatchCharLength: 2
       });
     } catch (error) {
       console.error('Error loading search index:', error);
@@ -49,16 +50,13 @@
 
   // Perform search
   function performSearch(query) {
-    if (!searchIndex || !query.trim()) {
+    if (!fuse || !query.trim()) {
       return [];
     }
 
     try {
-      const results = searchIndex.search(query);
-      return results.map(result => {
-        const doc = searchData.find(d => d.url === result.ref);
-        return doc;
-      }).filter(Boolean);
+      const results = fuse.search(query);
+      return results.map(result => result.item);
     } catch (error) {
       console.error('Search error:', error);
       return [];
