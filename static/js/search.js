@@ -39,7 +39,7 @@
           { name: 'content', weight: 1 }
         ],
         threshold: 0.4,
-        distance: 200,
+        ignoreLocation: true,
         includeScore: true,
         minMatchCharLength: 2
       });
