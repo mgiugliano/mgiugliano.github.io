@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Conf-calls static link - My Landing Page</title>
+  <link rel="stylesheet" href="../../static/css/style.css?v=1770888319">
+  <script src="../../static/js/fuse.min.js?v=1770888319"></script>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="../../index.html">Landing Page</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../../content/pages/about.html">About</a></li>
+          <li><a href="../../blog.html">Blog</a></li>
+        </ul>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark/light theme" title="Toggle dark/light theme">
+          <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        </button>
+      </nav>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search posts and pages..." autocomplete="off">
+        <div id="search-results"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article>
+            <h1 class="title">Conf-calls static link</h1>
+            <p class="date">2023-12-29</p>
+                  
+      <h1 id="conf-calls-static-link-how-to">Conf-calls static link: How
+      to?</h1>
+      <p>I’m excited to announce the launch of my new personal website!
+      This site is built with a minimalistic approach, focusing on
+      content and ease of use.</p>
+      <h2 id="zooms-personal-meeting-room">Zoom’s Personal Meeting
+      Room</h2>
+      <p>I love Zoom’s Personal Meeting Room: every user has a dedicated
+      url link that is permanent and never changing. I can then use it,
+      share it, email it, write it over and over, e.g. upfront on email
+      signatures, on recurring calendar shared events, in online
+      appointment booking systems (like <a
+      href="https://www.giugliano.info/cv/blog/quick-confcall-link/calendly.com">Calendly</a>),
+      etc.</p>
+      <p>Skilled users may configure their OS’s default text
+      substitution, or install an ad hoc text expander app (e.g. <a
+      href="https://espanso.org">espanso</a>, <a
+      href="https://textexpander.com">TextExpander</a>, etc.), and
+      become lightening fast in sharing the link. Indeed, as soon as I
+      type a certain combination of characters (i.e. ;zoom), a specific
+      string is automatically replaced
+      (e.g. <code>https://blabla.zoom.us/j/blablabla</code>).</p>
+      <p>In this way, organising a quick conf-call through instant
+      messaging (e.g. Slack, Whatsapp, Teams, etc.), responding to an
+      email asking for the link of our scheduled meeting, booking an
+      (online) event on my calendar became much faster than launching
+      Zoom, creating a new meeting, copy-pasting the link generated,
+      etc. Admittedly, the concept of a Personal Meeting Room may not be
+      always desirable or completely safe, but so far I rarely created
+      ad hoc events in Zoom.</p>
+      <h2 id="static-link-to-a-google-meet">Static link to a Google
+      Meet?</h2>
+      <p>Google Meet does NOT offer the same feature out of the box.
+      When creating a new meeting, the user must first navigate to <a
+      href="https://meet.google.com/">meet.google.com</a>, press the
+      button New Meeting, and then select the desired option from the
+      drop down menu, before finally getting to the link to be shared,
+      noted, saved, emailed, etc.</p>
+      <p>A simple workaround exists: create a daily (recurring) event on
+      any Google Calendar. To do so, navigate to <a
+      href="https://calendar.google.com/">calendar.google.com</a> and
+      then press the plus + button and create a new Event once for all.
+      Then choose</p>
+      <pre><code>- *Personal Meeting Room*, as title
+   - 06:00 - 06:15am, as the event time 
+   - daily repeating
+   - disable notification
+   - show as *Free* time
+   - visibility as *Private*
+   - **Add Google Meet video conferencing**</code></pre>
+      <p>At that point a new link is generated. This link is precious
+      and it should be saved somewhere safe. Note that I have chosen a
+      time of the day that is not intruding with my real daily schedule.
+      I also opted out from any notification. Finally, click on the
+      settings of the Google Meet and configure the meeting as you want.
+      I have chosen to set</p>
+      <pre><code>   - *Host Management* on
+   - *Host must join before anyone else*
+   - Meeting Access type: *Trusted* (people must ask to join)</code></pre>
+      <p>In this way, Google Meet will be like Zoom’s Personal Meeting
+      Room default settings.</p>
+      <p>Note: The upper limit of a recurring even is 730 occurrences,
+      so every two years the link will stop working. The procedure will
+      have to be repeated. If you find a trick to go around this
+      limitation, let me know.</p>
+      <p>I configured my favorite text expander (i.e. espanso) so
+      that:</p>
+      <pre><code>  - trigger: &quot;;zoom&quot;
+    replace: &quot;https://blablabla.zoom.us/j/blablabla&quot;
+  - trigger: &quot;;meet&quot;
+    replace: &quot;https://meet.google.com/uhuhuhuhu&quot;</code></pre>
+      <p>I hope this might be of help.</p>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 MG. Built with Pandoc and ❤️</p>
+    </div>
+  </footer>
+
+  <script src="../../static/js/search.js?v=1770888319"></script>
+  <script src="../../static/js/theme.js?v=1770888319"></script>
+</body>
+</html>

@@ -1,10 +1,17 @@
 [
   {
     "url": "index.html",
-    "title": "Welcome",
-    "content": "Welcome to My Personal Website\n\nHello! This is a minimalistic personal website built with Pandoc, featuring a powerful search functionality.\n\nAbout This Site\n\nThis website is:\n\n- Minimalistic: Clean design with generous white space\n- Fast: Static site generated with Pandoc\n- Searchable: Large, prominent search bar powered by Lunr.js\n- Easy to Maintain: Edit Markdown files directly on GitHub, automatic deployment\n\nFeatures\n\n- \ud83d\udcdd Blog Posts: Share your thoughts and ideas\n- \ud83d\udcc4 Static Pages: Create ab",
+    "title": "Ciao",
+    "content": "Were you perhaps looking for these other websites?\n\n- Home Page  ;  Lab Page  ; CV\n\n- UNIMORE - Colloquia course website\n- UNIMORE - ModellingNeuralSystems course website\n- UNIMORE - ePhysSignals course website\n\n\nOtherwise... welcome! You landed to my blurb page\n\nThis is a minimal landing page (built with Pandoc and featuring a quick search). Use the search bar above to find content, or explore the navigation menu to discover blog posts and pages.\n\nCheck out the Blog to see the latest posts, or ",
     "tags": "",
     "date": ""
+  },
+  {
+    "url": "content/posts/2023-12-29-conf-calls.html",
+    "title": "Conf-calls static link",
+    "content": "Conf-calls static link: How to?\n\nI'm excited to announce the launch of my new personal website! This site is built with a minimalistic approach, focusing on content and ease of use.\n\nZoom\u2019s Personal Meeting Room\n\nI love Zoom\u2019s Personal Meeting Room: every user has a dedicated url link that is permanent and never changing. I can then use it, share it, email it, write it over and over, e.g. upfront on email signatures, on recurring calendar shared events, in online appointment booking systems (lik",
+    "tags": "web, snippet",
+    "date": "2023-12-29"
   },
   {
     "url": "content/posts/2026-02-10-search-tutorial.html",
