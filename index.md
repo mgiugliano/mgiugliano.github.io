@@ -9,7 +9,7 @@ title: Welcome
 - [CV](https://www.giugliano.info/cv)
 
 - **UNIMORE** - [Colloquia](https://mgiugliano.github.io/colloquia/)
-- **UNIMORE** - [ModelingNeuralSystems](https://mgiugliano.github.io/ModelingNeuralSystems)
+- **UNIMORE** - [ModellingNeuralSystems](https://mgiugliano.github.io/ModellingNeuralSystems)
 - **UNIMORE** - [ePhysSignals](https://mgiugliano.github.io/ePhysSignals)
 
 
