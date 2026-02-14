@@ -1,7 +1,7 @@
 ---
 title: Ciao
 ---
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=mgiug-io)
+![](https://visitor-badge.laobi.icu/badge?page_id=mgiug-io)
 
 # Looking for these?
 
