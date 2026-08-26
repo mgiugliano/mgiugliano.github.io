@@ -194,6 +194,8 @@ Edit the footer section in `templates/default.html`:
 
 This site is deployed via **GitHub Actions**. The `deploy.yml` workflow runs `build.sh` to generate the site into the `docs/` directory, then uploads `docs/` as the deployment artifact. **GitHub Pages serves the contents of `docs/` as the site root** (e.g., `docs/index.html` → `https://<username>.github.io/index.html`).
 
+`docs/` is gitignored and not committed — it's build output regenerated from scratch by every CI run, not a second source of truth to keep in sync. Running `./build.sh` locally still produces it, for local preview.
+
 ### GitHub Pages Setup (First Time)
 
 1. Go to your repository **Settings**

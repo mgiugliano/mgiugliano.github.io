@@ -19,3 +19,9 @@ __pycache__/
 
 # Local test files
 /tmp/
+
+# Generated site output (built fresh by build.sh in CI on every deploy —
+# see .github/workflows/deploy.yml. Not needed in version control, and
+# committing it just duplicates build.sh's own output as a second source
+# of truth that can drift.)
+/docs/
