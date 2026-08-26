@@ -6,7 +6,13 @@
 set -e
 
 TEMPLATE="templates/default.html"
-OUTPUT_DIR="docs"
+FINAL_OUTPUT_DIR="docs"
+# Build into a scratch directory outside any synced folder (e.g. Dropbox) first,
+# then publish atomically at the end. Building directly into $FINAL_OUTPUT_DIR
+# with repeated rm-rf + rapid rewrites races Dropbox's own sync and can leave
+# "conflicted copy" files / stale content behind under the real filenames.
+OUTPUT_DIR=$(mktemp -d)
+export OUTPUT_DIR
 CONTENT_DIR="content"
 STATIC_DIR="static"
 # Generate timestamp for cache busting
@@ -14,9 +20,8 @@ BUILD_TIMESTAMP=$(date +%s)
 
 echo "🚀 Building personal website..."
 
-# Clean output directory
-echo "🧹 Cleaning output directory..."
-rm -rf "$OUTPUT_DIR"
+# Clean scratch output directory
+echo "🧹 Preparing scratch build directory ($OUTPUT_DIR)..."
 mkdir -p "$OUTPUT_DIR/content/posts" "$OUTPUT_DIR/content/pages"
 
 # Copy static files
@@ -146,6 +151,7 @@ from datetime import date
 from collections import defaultdict
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+MONTH_INITIALS = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"]
 
 def extract_date(filepath, content):
     m = re.search(r'^date:\s*"?([0-9]{4}-[0-9]{2}-[0-9]{2})"?', content, re.MULTILINE)
@@ -179,7 +185,7 @@ def level(n):
     return 3
 
 rows = []
-header_cells = ''.join(f'<span class="activity-cell-label">{m}</span>' for m in MONTHS)
+header_cells = ''.join(f'<span class="activity-cell-label" title="{m}">{i}</span>' for m, i in zip(MONTHS, MONTH_INITIALS))
 rows.append(f'<div class="activity-map-row activity-map-header"><span class="activity-map-year-label"></span>{header_cells}</div>')
 
 for y in range(max_year, min_year - 1, -1):
@@ -327,7 +333,8 @@ try:
             })
 
     # Write search index
-    with open('docs/search-index.json', 'w', encoding='utf-8') as f:
+    output_dir = os.environ.get('OUTPUT_DIR', 'docs')
+    with open(f'{output_dir}/search-index.json', 'w', encoding='utf-8') as f:
         json.dump(search_index, f, indent=2)
 
     print(f"  Indexed {len(search_index)} documents")
@@ -339,14 +346,21 @@ except Exception as e:
 PYTHON_SCRIPT
 
 # Verify search index was created
-if [ ! -f "docs/search-index.json" ]; then
+if [ ! -f "$OUTPUT_DIR/search-index.json" ]; then
   echo "❌ ERROR: Search index was not created!"
   exit 1
 fi
 
-echo "  ✓ Search index created successfully at docs/search-index.json"
+echo "  ✓ Search index created successfully"
 
-echo "✅ Build complete! Site generated in '$OUTPUT_DIR/' directory"
+# Publish: swap the finished scratch build into place in one shot, rather than
+# mutating $FINAL_OUTPUT_DIR file-by-file over several seconds.
+echo "📤 Publishing to '$FINAL_OUTPUT_DIR/'..."
+rm -rf "$FINAL_OUTPUT_DIR"
+cp -r "$OUTPUT_DIR" "$FINAL_OUTPUT_DIR"
+rm -rf "$OUTPUT_DIR"
+
+echo "✅ Build complete! Site generated in '$FINAL_OUTPUT_DIR/' directory"
 echo ""
 echo "To preview locally, run:"
-echo "  cd $OUTPUT_DIR && python3 -m http.server 8000"
+echo "  cd $FINAL_OUTPUT_DIR && python3 -m http.server 8000"

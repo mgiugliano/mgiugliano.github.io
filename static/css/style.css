@@ -425,24 +425,27 @@ li {
 
 /* Activity Map */
 .activity-map {
-  margin: 24px 0 32px;
+  margin: 16px 0 24px;
   overflow-x: auto;
 }
 
 .activity-map-row {
   display: flex;
   align-items: center;
-  gap: 4px;
-  margin-bottom: 4px;
+  gap: 3px;
+  margin-bottom: 3px;
 }
 
 .activity-map-header {
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .activity-map-year-label {
-  flex: 0 0 32px;
-  font-size: 11px;
+  flex: 0 0 24px;
+  width: 24px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 10px;
   font-weight: 600;
   color: var(--color-text-muted);
   text-align: right;
@@ -450,17 +453,21 @@ li {
 }
 
 .activity-cell-label {
-  flex: 0 0 14px;
-  font-size: 10px;
+  flex: 0 0 11px;
+  width: 11px;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 9px;
   color: var(--color-text-muted);
   text-align: center;
+  cursor: default;
 }
 
 .activity-cell {
-  flex: 0 0 14px;
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
+  flex: 0 0 11px;
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
   background: var(--color-border-light);
 }
 
@@ -480,8 +487,8 @@ li {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 4px;
-  margin-top: 8px;
+  gap: 3px;
+  margin-top: 5px;
 }
 
 .activity-map-legend-label {
