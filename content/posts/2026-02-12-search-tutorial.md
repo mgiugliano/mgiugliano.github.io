@@ -6,15 +6,13 @@ tags: tutorial, search, features
 
 # How to Use the Search Feature
 
-The search functionality is one of the most powerful features of this website. Let me show you how to make the most of it.
-
-## Getting Started with Search
-
-The **large search bar** is prominently displayed at the top of every page. You can't miss it! Here's how to use it effectively:
+The **large search bar** is prominently displayed at the top of every page. 
+You can't miss it! Here's how to use it effectively:
 
 ### Basic Search
 
-Simply type your search query into the search bar. As you type, results will appear instantly below the search box.
+Simply type your search query into the search bar. 
+As you type, results will appear instantly below the search box.
 
 - **Minimum 2 characters**: The search activates after you type at least 2 characters
 - **Real-time results**: Results update as you type
@@ -36,12 +34,12 @@ The search functionality indexes:
 
 ### Keyboard Shortcuts
 
-- **Escape**: Close the search results dropdown
+- **Escape**: Close the search results drop down
 - **Click outside**: The results close automatically when you click elsewhere
 
 ## Technical Details
 
-For the technically curious, here's how it works:
+It works wiht
 
 - **Lunr.js**: A lightweight, client-side search library
 - **JSON Index**: All content is indexed in a single JSON file at build time
