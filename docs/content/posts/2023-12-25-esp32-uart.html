@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Title goes here - Michele Giugliano</title>
+  <link rel="stylesheet" href="../../static/css/style.css?v=1787759111">
+  <script src="../../static/js/fuse.min.js?v=1787759111"></script>
+  </head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <a href="../../home.html">Michele Giugliano</a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="../../blog.html">Blog</a></li>
+          <li><a href="../../home.html">Home</a></li>
+          <li><a href="../../content/pages/about.html">About</a></li>
+          <li><a href="https://www.giugliano.info/lab">Lab</a></li>
+          <li><a href="https://www.giugliano.info/cv">CV</a></li>
+         </ul>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark/light theme" title="Toggle dark/light theme">
+          <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        </button>
+      </nav>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search posts and pages..." autocomplete="off">
+        <div id="search-results"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <article>
+            <h1 class="title">Title goes here</h1>
+            <p class="date">2023-12-25</p>
+                        <p class="post-nav"><a href="../../blog.html">&larr; Back to Blog</a></p>
+      
+      <p>Here is the text.</p>
+      <div class="sourceCode" id="cb1"><pre
+      class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;Arduino.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UART_RX_PIN </span><span class="dv">2</span><span class="pp"> </span><span class="co">// GPIO2</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UART_TX_PIN </span><span class="dv">4</span><span class="pp"> </span><span class="co">// GPIO4</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Serial connects to the computer</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Serial2 is the hardware UART port that connects to external circuitry</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  Serial2<span class="op">.</span>begin<span class="op">(</span><span class="dv">115200</span><span class="op">,</span> SERIAL_8N1<span class="op">,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                UART_RX_PIN<span class="op">,</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                UART_TX_PIN<span class="op">);</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Copy byte incoming via PC serial</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>Serial<span class="op">.</span>available<span class="op">()</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    Serial2<span class="op">.</span>write<span class="op">(</span>Serial<span class="op">.</span>read<span class="op">());</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Copy bytes incoming via UART serial</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(</span>Serial2<span class="op">.</span>available<span class="op">()</span> <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    Serial<span class="op">.</span>write<span class="op">(</span>Serial2<span class="op">.</span>read<span class="op">());</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+
+            <p class="post-nav post-nav-bottom"><a href="../../blog.html">&larr; Back to Blog</a></p>
+          </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; Built with Pandoc and ❤️</p>
+    </div>
+  </footer>
+
+  <script src="../../static/js/search.js?v=1787759111"></script>
+  <script src="../../static/js/theme.js?v=1787759111"></script>
+</body>
+</html>

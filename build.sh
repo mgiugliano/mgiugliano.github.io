@@ -32,15 +32,23 @@ convert_md_to_html() {
   local input_file="$1"
   local output_file="$2"
   local root_path="${3:-.}"
-  
+  local is_post="${4:-}"
+
   echo "  Converting: $input_file -> $output_file"
-  
+
+  local extra_args=()
+  if [ -n "$is_post" ]; then
+    extra_args+=(--variable="is_post:true")
+  fi
+
   pandoc "$input_file" \
     --template="$TEMPLATE" \
     --standalone \
     --to=html5 \
+    --mathjax \
     --variable="cache_bust:$BUILD_TIMESTAMP" \
     --variable="root:$root_path" \
+    "${extra_args[@]}" \
     -o "$output_file"
 }
 
@@ -113,7 +121,7 @@ if [ -d "$CONTENT_DIR/posts" ]; then
   for post in "$CONTENT_DIR/posts"/*.md; do
     if [ -f "$post" ]; then
       filename=$(basename "$post" .md)
-      convert_md_to_html "$post" "$OUTPUT_DIR/content/posts/$filename.html" "../.."
+      convert_md_to_html "$post" "$OUTPUT_DIR/content/posts/$filename.html" "../.." "true"
     fi
   done
 fi
@@ -129,6 +137,79 @@ if [ -d "$CONTENT_DIR/pages" ]; then
   done
 fi
 
+# Generate activity map (posts per month/year) for the blog page
+echo "📊 Generating activity map..."
+python3 << 'PYTHON_SCRIPT'
+import glob
+import re
+from datetime import date
+from collections import defaultdict
+
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+def extract_date(filepath, content):
+    m = re.search(r'^date:\s*"?([0-9]{4}-[0-9]{2}-[0-9]{2})"?', content, re.MULTILINE)
+    if m:
+        return m.group(1)
+    m = re.match(r'.*?([0-9]{4}-[0-9]{2}-[0-9]{2})', filepath)
+    return m.group(1) if m else None
+
+counts = defaultdict(int)
+for filepath in glob.glob('content/posts/*.md'):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    d = extract_date(filepath, content)
+    if not d:
+        continue
+    y, m, _ = d.split('-')
+    counts[(int(y), int(m))] += 1
+
+today = date.today()
+years = [y for y, m in counts.keys()]
+min_year = min(years) if years else today.year
+max_year = max(max(years), today.year) if years else today.year
+
+def level(n):
+    if n <= 0:
+        return 0
+    if n == 1:
+        return 1
+    if n == 2:
+        return 2
+    return 3
+
+rows = []
+header_cells = ''.join(f'<span class="activity-cell-label">{m}</span>' for m in MONTHS)
+rows.append(f'<div class="activity-map-row activity-map-header"><span class="activity-map-year-label"></span>{header_cells}</div>')
+
+for y in range(max_year, min_year - 1, -1):
+    cells = []
+    for m in range(1, 13):
+        n = counts.get((y, m), 0)
+        lvl = level(n)
+        label = f"{n} post{'s' if n != 1 else ''}" if n else "no posts"
+        cells.append(f'<span class="activity-cell" data-level="{lvl}" title="{MONTHS[m-1]} {y} &middot; {label}"></span>')
+    rows.append(f'<div class="activity-map-row"><span class="activity-map-year-label">{y}</span>{"".join(cells)}</div>')
+
+legend = (
+    '<div class="activity-map-legend">'
+    '<span class="activity-map-legend-label">Less</span>'
+    '<span class="activity-cell" data-level="0"></span>'
+    '<span class="activity-cell" data-level="1"></span>'
+    '<span class="activity-cell" data-level="2"></span>'
+    '<span class="activity-cell" data-level="3"></span>'
+    '<span class="activity-map-legend-label">More</span>'
+    '</div>'
+)
+
+fragment = '<div class="activity-map">' + ''.join(rows) + legend + '</div>'
+
+with open('/tmp/activity-map-fragment.html', 'w', encoding='utf-8') as f:
+    f.write(fragment)
+
+print(f"  Activity map: {min_year}-{max_year}")
+PYTHON_SCRIPT
+
 # Generate blog index page
 echo "📚 Generating blog index..."
 cat > /tmp/blog-list.md << 'EOF'
@@ -136,9 +217,24 @@ cat > /tmp/blog-list.md << 'EOF'
 title: Blog
 ---
 
+![](https://visitor-badge.laobi.icu/badge?page_id=mgiug-io)
+
+<!-- ACTIVITY_MAP -->
+
 # Blog Posts
 
 EOF
+
+# Inject the activity map fragment
+python3 -c "
+with open('/tmp/blog-list.md', 'r') as f:
+    content = f.read()
+with open('/tmp/activity-map-fragment.html', 'r') as f:
+    fragment = f.read()
+content = content.replace('<!-- ACTIVITY_MAP -->', fragment)
+with open('/tmp/blog-list.md', 'w') as f:
+    f.write(content)
+"
 
 # List all blog posts (sorted by filename, newest first)
 if [ -d "$CONTENT_DIR/posts" ]; then

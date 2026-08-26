@@ -6,24 +6,21 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>$if(title)$$title$ - $endif$Michele Giugliano</title>
-  <link rel="stylesheet" href="$root$/static/css/style.css$if(cache_bust)$?v=$cache_bust$$endif$">
-  <script src="$root$/static/js/fuse.min.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
-  $if(math)$
-  $math$
-  $endif$
-</head>
+  <title>Welcome to my Blog - Michele Giugliano</title>
+  <link rel="stylesheet" href="../../static/css/style.css?v=1787759111">
+  <script src="../../static/js/fuse.min.js?v=1787759111"></script>
+  </head>
 <body>
   <header>
     <div class="container">
       <nav>
         <div class="logo">
-          <a href="$root$/home.html">Michele Giugliano</a>
+          <a href="../../home.html">Michele Giugliano</a>
         </div>
         <ul class="nav-links">
-          <li><a href="$root$/blog.html">Blog</a></li>
-          <li><a href="$root$/home.html">Home</a></li>
-          <li><a href="$root$/content/pages/about.html">About</a></li>
+          <li><a href="../../blog.html">Blog</a></li>
+          <li><a href="../../home.html">Home</a></li>
+          <li><a href="../../content/pages/about.html">About</a></li>
           <li><a href="https://www.giugliano.info/lab">Lab</a></li>
           <li><a href="https://www.giugliano.info/cv">CV</a></li>
          </ul>
@@ -40,22 +37,16 @@
 
   <main class="container">
     <article>
-      $if(title)$
-      <h1 class="title">$title$</h1>
-      $if(date)$
-      <p class="date">$date$</p>
-      $endif$
-      $endif$
-      $if(is_post)$
-      <p class="post-nav"><a href="$root$/blog.html">&larr; Back to Blog</a></p>
-      $endif$
+            <h1 class="title">Welcome to my Blog</h1>
+            <p class="date">2018-08-26</p>
+                        <p class="post-nav"><a href="../../blog.html">&larr; Back to Blog</a></p>
+      
+      <p>This is my web presence, welcome! This blog serves as a
+      repository of interesting or useful tips and tricks, as well as of
+      other information.</p>
 
-      $body$
-
-      $if(is_post)$
-      <p class="post-nav post-nav-bottom"><a href="$root$/blog.html">&larr; Back to Blog</a></p>
-      $endif$
-    </article>
+            <p class="post-nav post-nav-bottom"><a href="../../blog.html">&larr; Back to Blog</a></p>
+          </article>
   </main>
 
   <footer>
@@ -64,7 +55,7 @@
     </div>
   </footer>
 
-  <script src="$root$/static/js/search.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
-  <script src="$root$/static/js/theme.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
+  <script src="../../static/js/search.js?v=1787759111"></script>
+  <script src="../../static/js/theme.js?v=1787759111"></script>
 </body>
 </html>
