@@ -87,8 +87,25 @@ with open('/tmp/index-with-blogs.md', 'w') as f:
     sed -i 's/<!-- BLOG_ENTRIES -->//' /tmp/index-with-blogs.md
   fi
 
-  convert_md_to_html "/tmp/index-with-blogs.md" "$OUTPUT_DIR/index.html" "."
+  convert_md_to_html "/tmp/index-with-blogs.md" "$OUTPUT_DIR/home.html" "."
 fi
+
+# Generate root index.html as a redirect stub to blog.html
+echo "↪️  Generating index.html redirect to blog.html..."
+cat > "$OUTPUT_DIR/index.html" << 'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="0; url=blog.html">
+  <title>Redirecting to Blog...</title>
+  <script>window.location.replace('blog.html');</script>
+</head>
+<body>
+  <p>Redirecting to the <a href="blog.html">Blog</a>...</p>
+</body>
+</html>
+EOF
 
 # Convert blog posts
 if [ -d "$CONTENT_DIR/posts" ]; then
@@ -192,7 +209,7 @@ try:
             
             # Determine URL
             if filepath == 'index.md':
-                url = 'index.html'
+                url = 'home.html'
             elif 'posts' in filepath:
                 filename = os.path.basename(filepath).replace('.md', '.html')
                 url = f'content/posts/{filename}'

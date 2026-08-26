@@ -126,7 +126,7 @@ Edit `templates/default.html`:
 
 ```html
 <div class="logo">
-  <a href="$root$/index.html">Your Name Here</a>
+  <a href="$root$/home.html">Your Name Here</a>
 </div>
 ```
 
@@ -142,7 +142,7 @@ Edit the navigation section in `templates/default.html`:
 
 ```html
 <ul class="nav-links">
-  <li><a href="$root$/index.html">Home</a></li>
+  <li><a href="$root$/home.html">Home</a></li>
   <li><a href="$root$/content/pages/about.html">About</a></li>
   <li><a href="$root$/blog.html">Blog</a></li>
   <li><a href="$root$/content/pages/contact.html">Contact</a></li> <!-- Add new links -->
