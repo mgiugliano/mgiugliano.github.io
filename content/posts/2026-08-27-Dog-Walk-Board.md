@@ -11,7 +11,7 @@ I finally took a few days off in Liguria with my dog, Daisy. When she is with me
 Now, the building across the street has another dog, same opinionated attitude against the world, same walking hours. The other dog dislikes me and my dog. That guarantees close encounters and out-of-control barking dogs on a daily basis. A couple of days ago, my neighbor told me the whole thing stresses her out enormously. Her proposed solution: swap numbers and text each other our locations in real time every time either of us goes for a walk. We ended up coordinating our walks like a military operation.
 
 
-![ScreenShot](https://github.com/mgiugliano/DogWalkBoard/blob/main/docs/screenshots/control.jpg?raw=true)
+![ScreenShot](https://github.com/mgiugliano/DogWalkBoard/blob/main/docs/screenshots/control.jpg?raw=true){ width=150px }
 
 # A web app, instead of back and forth messaging 
 
