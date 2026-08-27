@@ -1,7 +1,7 @@
 ---
-title: How to Use the Search Feature
+title: Dog Walk Board App 
 date: 2026-08-27
-tags: tutorial, search, features
+tags: webapp, vibecoding, dogs 
 ---
 
 # (Not so) friendly dogs walking around 
