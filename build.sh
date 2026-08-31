@@ -225,6 +225,8 @@ title: Blog
 
 ![](https://visitor-badge.laobi.icu/badge?page_id=mgiug-io)
 
+<p class="feed-link"><a href="feed.xml" title="Subscribe via RSS/Atom" aria-label="RSS feed"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg> RSS feed</a></p>
+
 <!-- ACTIVITY_MAP -->
 
 # Blog Posts
@@ -264,6 +266,93 @@ if [ -d "$CONTENT_DIR/posts" ]; then
 fi
 
 convert_md_to_html "/tmp/blog-list.md" "$OUTPUT_DIR/blog.html" "."
+
+# Generate Atom feed of blog posts
+echo "📡 Generating Atom feed..."
+python3 << 'PYTHON_SCRIPT'
+import glob
+import os
+import re
+from datetime import datetime, timezone
+from xml.sax.saxutils import escape
+
+SITE_URL = "https://blog.giugliano.info"
+
+def extract_metadata(content):
+    metadata = {}
+    body = content
+    if content.startswith('---'):
+        parts = content.split('---', 2)
+        if len(parts) >= 3:
+            for line in parts[1].split('\n'):
+                if ':' in line:
+                    key, value = line.split(':', 1)
+                    metadata[key.strip()] = value.strip().strip('"')
+            body = parts[2]
+    return metadata, body
+
+def strip_markdown(text):
+    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
+    text = re.sub(r'!\[[^\]]*\]\([^\)]*\)', '', text)
+    text = re.sub(r'#+ ', '', text)
+    text = re.sub(r'\[([^\]]+)\]\([^\)]+\)', r'\1', text)
+    text = re.sub(r'[*_`]', '', text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+def iso(date_str):
+    return datetime.strptime(date_str, '%Y-%m-%d').replace(tzinfo=timezone.utc).strftime('%Y-%m-%dT00:00:00Z')
+
+entries = []
+for filepath in sorted(glob.glob('content/posts/*.md'), reverse=True):
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    metadata, body = extract_metadata(content)
+    filename = os.path.basename(filepath)[:-3]
+
+    date_str = metadata.get('date', '')
+    m = re.match(r'^([0-9]{4}-[0-9]{2}-[0-9]{2})', date_str) or re.match(r'^([0-9]{4}-[0-9]{2}-[0-9]{2})', filename)
+    if not m:
+        continue
+
+    entries.append({
+        'title': metadata.get('title', filename),
+        'url': f'{SITE_URL}/content/posts/{filename}.html',
+        'date': m.group(1),
+        'summary': strip_markdown(body)[:400],
+    })
+
+updated = iso(entries[0]['date']) if entries else datetime.now(timezone.utc).strftime('%Y-%m-%dT00:00:00Z')
+
+items = []
+for e in entries:
+    items.append(f'''  <entry>
+    <title>{escape(e['title'])}</title>
+    <link href="{escape(e['url'])}"/>
+    <id>{escape(e['url'])}</id>
+    <published>{iso(e['date'])}</published>
+    <updated>{iso(e['date'])}</updated>
+    <summary type="text">{escape(e['summary'])}</summary>
+    <author><name>Michele Giugliano</name></author>
+  </entry>''')
+
+feed = f'''<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Michele Giugliano — Blog</title>
+  <subtitle>Blog posts by Michele Giugliano</subtitle>
+  <link href="{SITE_URL}/feed.xml" rel="self"/>
+  <link href="{SITE_URL}/blog.html"/>
+  <id>{SITE_URL}/</id>
+  <updated>{updated}</updated>
+{chr(10).join(items)}
+</feed>
+'''
+
+output_dir = os.environ.get('OUTPUT_DIR', 'docs')
+with open(f'{output_dir}/feed.xml', 'w', encoding='utf-8') as f:
+    f.write(feed)
+
+print(f"  Feed generated with {len(entries)} entries")
+PYTHON_SCRIPT
 
 # Generate search index
 echo "🔍 Generating search index..."

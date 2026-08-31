@@ -1,6 +1,6 @@
 ---
 title: Conf-calls and Personal Meeting Rooms
-date: 2028-08-29
+date: 2026-08-29
 tags: web, snippet, work, lifestyle, hacks
 ---
 

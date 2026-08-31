@@ -423,6 +423,28 @@ li {
   margin-bottom: 0;
 }
 
+/* Feed link */
+.feed-link {
+  margin: 6px 0 4px;
+}
+
+.feed-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  background-image: none;
+}
+
+.feed-link a:hover {
+  color: var(--color-accent);
+}
+
+.feed-link svg {
+  flex: 0 0 auto;
+}
+
 /* Activity Map */
 .activity-map {
   margin: 16px 0 24px;
