@@ -38,12 +38,16 @@ convert_md_to_html() {
   local output_file="$2"
   local root_path="${3:-.}"
   local is_post="${4:-}"
+  local tags_html="${5:-}"
 
   echo "  Converting: $input_file -> $output_file"
 
   local extra_args=()
   if [ -n "$is_post" ]; then
     extra_args+=(--variable="is_post:true")
+  fi
+  if [ -n "$tags_html" ]; then
+    extra_args+=(--variable="tags_html:$tags_html")
   fi
 
   pandoc "$input_file" \
@@ -55,6 +59,21 @@ convert_md_to_html() {
     --variable="root:$root_path" \
     "${extra_args[@]}" \
     -o "$output_file"
+}
+
+# Render a post's `tags:` front matter as <span class="tag-pill"> markup,
+# wrapped in a container div. Empty output if the post has no tags.
+tags_html_for() {
+  python3 - "$1" << 'PYEOF'
+import re, html, sys
+with open(sys.argv[1], encoding='utf-8') as f:
+    content = f.read()
+m = re.search(r'(?m)^tags:\s*(.*)$', content)
+tags = [t.strip() for t in (m.group(1) if m else '').split(',') if t.strip()]
+if tags:
+    spans = ''.join(f'<span class="tag-pill">{html.escape(t)}</span>' for t in tags)
+    print(f'<div class="post-tags">{spans}</div>', end='')
+PYEOF
 }
 
 # Convert index page (with blog entries injected)
@@ -126,7 +145,8 @@ if [ -d "$CONTENT_DIR/posts" ]; then
   for post in "$CONTENT_DIR/posts"/*.md; do
     if [ -f "$post" ]; then
       filename=$(basename "$post" .md)
-      convert_md_to_html "$post" "$OUTPUT_DIR/content/posts/$filename.html" "../.." "true"
+      post_tags_html="$(tags_html_for "$post")"
+      convert_md_to_html "$post" "$OUTPUT_DIR/content/posts/$filename.html" "../.." "true" "$post_tags_html"
     fi
   done
 fi
@@ -216,6 +236,91 @@ with open('/tmp/activity-map-fragment.html', 'w', encoding='utf-8') as f:
 print(f"  Activity map: {min_year}-{max_year}")
 PYTHON_SCRIPT
 
+# Generate the post-card grid for the blog list page: a thumbnail (the
+# post's own image if it has one, otherwise a generated Catppuccin-accent
+# tile picked deterministically per post) + title + date + tags.
+echo "🎴 Generating post cards..."
+python3 << 'PYTHON_SCRIPT'
+import glob
+import hashlib
+import html
+import os
+import re
+
+CATPPUCCIN_ACCENTS = [
+    "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
+    "yellow", "green", "teal", "sky", "sapphire", "blue", "lavender",
+]
+
+def accent_for(key):
+    h = int(hashlib.md5(key.encode()).hexdigest(), 16)
+    return CATPPUCCIN_ACCENTS[h % len(CATPPUCCIN_ACCENTS)]
+
+def parse_front_matter(content):
+    metadata, body = {}, content
+    if content.startswith('---'):
+        parts = content.split('---', 2)
+        if len(parts) >= 3:
+            for line in parts[1].split('\n'):
+                if ':' in line:
+                    k, v = line.split(':', 1)
+                    metadata[k.strip()] = v.strip().strip('"')
+            body = parts[2]
+    return metadata, body
+
+def thumb_html_for(slug, metadata, body):
+    src = metadata.get('thumbnail', '').strip()
+    if not src:
+        # Strip HTML comments first — otherwise the example image in
+        # blog new's reminder block (an inert <!-- ... --> block) gets
+        # mistaken for a real embedded image.
+        body_no_comments = re.sub(r'<!--.*?-->', '', body, flags=re.DOTALL)
+        m = re.search(r'!\[[^\]]*\]\(([^)\s]+)\)', body_no_comments)
+        if m:
+            src = m.group(1)
+    if src:
+        return f'<div class="post-thumb"><img src="{html.escape(src)}" alt="" loading="lazy"></div>'
+    accent = accent_for(slug)
+    return f'<div class="post-thumb post-thumb-generated" data-accent="{accent}"></div>'
+
+def tags_html_for(metadata):
+    tags = [t.strip() for t in metadata.get('tags', '').split(',') if t.strip()]
+    if not tags:
+        return ''
+    spans = ''.join(f'<span class="tag-pill">{html.escape(t)}</span>' for t in tags)
+    return f'<div class="post-card-tags">{spans}</div>'
+
+cards = []
+for filepath in sorted(glob.glob('content/posts/*.md'), reverse=True):
+    slug = os.path.basename(filepath)[:-3]
+    with open(filepath, encoding='utf-8') as f:
+        content = f.read()
+    metadata, body = parse_front_matter(content)
+    title = metadata.get('title', slug).strip('"\'')
+    d = metadata.get('date', '')
+    if not d:
+        m = re.match(r'^([0-9]{4}-[0-9]{2}-[0-9]{2})', slug)
+        d = m.group(1) if m else ''
+
+    card = (
+        f'<a class="post-card" href="content/posts/{slug}.html">'
+        f'{thumb_html_for(slug, metadata, body)}'
+        f'<div class="post-card-body">'
+        f'<h2 class="post-card-title">{html.escape(title)}</h2>'
+        f'<p class="post-card-date">{html.escape(d)}</p>'
+        f'{tags_html_for(metadata)}'
+        f'</div></a>'
+    )
+    cards.append(card)
+
+fragment = '<div class="post-card-grid">' + ''.join(cards) + '</div>' if cards else ''
+
+with open('/tmp/post-cards-fragment.html', 'w', encoding='utf-8') as f:
+    f.write(fragment)
+
+print(f"  Generated {len(cards)} post card(s)")
+PYTHON_SCRIPT
+
 # Generate blog index page
 echo "📚 Generating blog index..."
 cat > /tmp/blog-list.md << 'EOF'
@@ -229,41 +334,22 @@ title: Blog
 
 <!-- ACTIVITY_MAP -->
 
-# Blog Posts
-
+<!-- POST_CARDS -->
 EOF
 
-# Inject the activity map fragment
+# Inject the activity map and post-card fragments
 python3 -c "
 with open('/tmp/blog-list.md', 'r') as f:
     content = f.read()
 with open('/tmp/activity-map-fragment.html', 'r') as f:
-    fragment = f.read()
-content = content.replace('<!-- ACTIVITY_MAP -->', fragment)
+    activity_map = f.read()
+with open('/tmp/post-cards-fragment.html', 'r') as f:
+    post_cards = f.read()
+content = content.replace('<!-- ACTIVITY_MAP -->', activity_map)
+content = content.replace('<!-- POST_CARDS -->', post_cards)
 with open('/tmp/blog-list.md', 'w') as f:
     f.write(content)
 "
-
-# List all blog posts (sorted by filename, newest first)
-if [ -d "$CONTENT_DIR/posts" ]; then
-  for post in $(ls -r "$CONTENT_DIR/posts"/*.md 2>/dev/null); do
-    if [ -f "$post" ]; then
-      filename=$(basename "$post" .md)
-      
-      # Extract title from YAML front matter or use filename
-      title=$(grep "^title:" "$post" | head -1 | sed 's/title: *//; s/"//g' || echo "$filename")
-      
-      # Extract date from YAML front matter or filename
-      date=$(grep "^date:" "$post" | head -1 | sed 's/date: *//; s/"//g' || echo "$filename" | grep -oE '^[0-9]{4}-[0-9]{2}-[0-9]{2}' || echo "")
-      
-      echo "## [$title](content/posts/$filename.html)" >> /tmp/blog-list.md
-      if [ -n "$date" ]; then
-        echo "*$date*" >> /tmp/blog-list.md
-      fi
-      echo "" >> /tmp/blog-list.md
-    fi
-  done
-fi
 
 convert_md_to_html "/tmp/blog-list.md" "$OUTPUT_DIR/blog.html" "."
 
