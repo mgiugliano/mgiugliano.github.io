@@ -2,8 +2,9 @@
 title: Conf-calls and Personal Meeting Rooms
 date: 2026-08-29
 tags: web, snippet, work, lifestyle, hacks
+thumbnail: /static/images/2026-08-29-ConfCalls-and-Personal-Meeting-Rooms-thumb.png
 ---
-
+<!-- Thumbnail credit: "Google Meet icon (2020).svg" via https://commons.wikimedia.org/wiki/File:Google_Meet_icon_(2020).svg (Public domain, by Google) -->
 # Conf-calls static link: How to?
 
 With the convenience of "text-expanders" (e.g. [espanso](https://espanso.org), [TextExpander](https://textexpander.com), etc.), I have always felt the need to rapidly communicate (in an email, instant messaging, or a calendar invite) the hyperlink to join a conference call that I was organizing.

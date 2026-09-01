@@ -2,8 +2,9 @@
 title: Podcast Apps and Personal Audio Files
 date: 2026-09-01
 tags: podcast, coding, lifestyle, macos, automation
+thumbnail: /static/images/2026-09-01-Podcast-Apps-and-Personal-audio-files-thumb.jpg
 ---
-
+<!-- Thumbnail credit: "New voice over booth for NPO.jpg" via https://commons.wikimedia.org/wiki/File:New_voice_over_booth_for_NPO.jpg (CC BY 2.0, by Hens Zimmerman) -->
 # Importing audio files into a Podcast app
 I spend a lot of time commuting—walking or driving. While I do love my usual news and topic feeds, I often find myself wanting to listen to my own thoughts. Whether it's voice notes I've recorded or synthetic podcasts generated from articles via NotebookLM, I need a way to brainstorm and process information when I can't be staring at a screen.
 
