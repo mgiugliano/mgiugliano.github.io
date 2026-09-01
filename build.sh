@@ -17,6 +17,8 @@ CONTENT_DIR="content"
 STATIC_DIR="static"
 # Generate timestamp for cache busting
 BUILD_TIMESTAMP=$(date +%s)
+# Current year, for the footer copyright line
+COPYRIGHT_YEAR=$(date +%Y)
 
 echo "🚀 Building personal website..."
 
@@ -49,6 +51,11 @@ convert_md_to_html() {
   if [ -n "$tags_html" ]; then
     extra_args+=(--variable="tags_html:$tags_html")
   fi
+  # Only load jQuery + bigfoot.js on posts that actually use footnotes —
+  # same "pay only for what you use" pattern as MathJax.
+  if grep -qE '\[\^[^]]+\]' "$input_file" 2>/dev/null; then
+    extra_args+=(--variable="has_footnotes:true")
+  fi
 
   pandoc "$input_file" \
     --template="$TEMPLATE" \
@@ -56,6 +63,7 @@ convert_md_to_html() {
     --to=html5 \
     --mathjax \
     --variable="cache_bust:$BUILD_TIMESTAMP" \
+    --variable="copyright_year:$COPYRIGHT_YEAR" \
     --variable="root:$root_path" \
     "${extra_args[@]}" \
     -o "$output_file"

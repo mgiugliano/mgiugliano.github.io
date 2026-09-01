@@ -316,6 +316,7 @@ This website system is provided as-is for personal use. Feel free to adapt it fo
 Built with:
 
 - [Pandoc](https://pandoc.org/) - Universal document converter
-- [Lunr.js](https://lunrjs.com/) - Client-side search
+- [Fuse.js](https://www.fusejs.io/) - Client-side search
+- [Bigfoot.js](https://github.com/lemonmade/bigfoot) (MIT) - Popover footnotes, loaded only on posts that use them
 - [GitHub Pages](https://pages.github.com/) - Free hosting
 - [GitHub Actions](https://github.com/features/actions) - CI/CD automation

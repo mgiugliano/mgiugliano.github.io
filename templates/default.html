@@ -13,6 +13,9 @@
   $if(math)$
   $math$
   $endif$
+  $if(has_footnotes)$
+  <link rel="stylesheet" href="$root$/static/css/bigfoot-default.css$if(cache_bust)$?v=$cache_bust$$endif$">
+  $endif$
 </head>
 <body>
   <header>
@@ -63,11 +66,24 @@
 
   <footer>
     <div class="container">
-      <p>&copy; Built with Pandoc and ❤️</p>
+      <p class="copyright">&copy; $copyright_year$ Michele GIUGLIANO</p>
+      <p>Built with Pandoc and ❤️</p>
     </div>
   </footer>
 
   <script src="$root$/static/js/search.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
   <script src="$root$/static/js/theme.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
+  $if(has_footnotes)$
+  <script src="$root$/static/js/jquery.min.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
+  <script src="$root$/static/js/bigfoot.min.js$if(cache_bust)$?v=$cache_bust$$endif$"></script>
+  <script>
+    if (window.jQuery && typeof jQuery.bigfoot === 'function') {
+      jQuery.bigfoot({
+        footnoteParentClass: 'footnotes',
+        actionOriginalFN: 'hide'
+      });
+    }
+  </script>
+  $endif$
 </body>
 </html>
