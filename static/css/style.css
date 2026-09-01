@@ -90,7 +90,7 @@ body {
    functional contrast against serif reading content */
 nav, .search-container, .theme-toggle, .nav-links,
 .date, .post-nav, .feed-link, footer,
-.tag-pill, .post-card-tags, .post-card-date {
+.tag-pill, .post-card-tags, .post-card-date, .thumbnail-credit {
   font-family: var(--font-ui);
 }
 
@@ -493,6 +493,23 @@ li {
   flex-wrap: wrap;
   gap: 6px;
   margin: -8px 0 20px;
+}
+
+/* Credit line for a blog-thumbnail-fetched image, shown on the post page */
+.thumbnail-credit {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin: -8px 0 20px;
+}
+
+.thumbnail-credit a {
+  color: var(--color-text-muted);
+  background-image: none;
+}
+
+.thumbnail-credit a:hover {
+  color: var(--color-accent);
 }
 
 /* Post card grid (blog list) */

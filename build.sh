@@ -56,6 +56,11 @@ convert_md_to_html() {
   if grep -qE '\[\^[^]]+\]' "$input_file" 2>/dev/null; then
     extra_args+=(--variable="has_footnotes:true")
   fi
+  local credit_html
+  credit_html="$(thumbnail_credit_html_for "$input_file")"
+  if [ -n "$credit_html" ]; then
+    extra_args+=(--variable="thumbnail_credit_html:$credit_html")
+  fi
 
   pandoc "$input_file" \
     --template="$TEMPLATE" \
@@ -81,6 +86,45 @@ tags = [t.strip() for t in (m.group(1) if m else '').split(',') if t.strip()]
 if tags:
     spans = ''.join(f'<span class="tag-pill">{html.escape(t)}</span>' for t in tags)
     print(f'<div class="post-tags">{spans}</div>', end='')
+PYEOF
+}
+
+# Render the visible credit line for a fetched thumbnail (blog thumbnail
+# writes an HTML comment with this info right after the front matter; this
+# turns it into small, muted, on-page text). Empty output if the post has
+# no such comment (no thumbnail, or a hand-picked one with no fetch record).
+thumbnail_credit_html_for() {
+  python3 - "$1" << 'PYEOF'
+import re, html, sys
+with open(sys.argv[1], encoding='utf-8') as f:
+    content = f.read()
+
+title = page_url = license_ = artist = None
+
+m = re.search(
+    r'<!--\s*Thumbnail credit:\s*"(.*?)"\s*via\s*(\S+)\s*\(([^,)]+)(?:,\s*by\s*(.*?))?\)\s*-->',
+    content,
+)
+if m:
+    title, page_url, license_, artist = m.groups()
+else:
+    # Older format, written before blog thumbnail also recorded a title.
+    m = re.search(
+        r'<!--\s*Thumbnail source:\s*(\S+)\s*\(([^,)]+)(?:,\s*by\s*(.*?))?\)\s*-->',
+        content,
+    )
+    if m:
+        page_url, license_, artist = m.groups()
+
+if page_url:
+    by = f', by {html.escape(artist)}' if artist else ''
+    lead = f'Thumbnail: &ldquo;{html.escape(title)}&rdquo; via' if title else 'Thumbnail via'
+    print(
+        f'<p class="thumbnail-credit">{lead} '
+        f'<a href="{html.escape(page_url)}">Wikimedia Commons</a> '
+        f'&mdash; {html.escape(license_)}{by}</p>',
+        end='',
+    )
 PYEOF
 }
 

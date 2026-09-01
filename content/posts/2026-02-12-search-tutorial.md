@@ -2,8 +2,9 @@
 title: How to Use the Search Feature
 date: 2026-02-10
 tags: tutorial, search, features
+thumbnail: /static/images/2026-02-12-search-tutorial-thumb.jpg
 ---
-
+<!-- Thumbnail source: https://commons.wikimedia.org/wiki/File:Passiflora_caerulea_STEREO_(R-L)_2019-06-27.jpg (CC BY-SA 4.0, by Franz van Duns) -->
 # How to Use the Search Feature
 
 The **large search bar** is prominently displayed at the top of every page. 
