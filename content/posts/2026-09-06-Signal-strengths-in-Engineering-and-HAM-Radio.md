@@ -125,7 +125,7 @@ Correct nomenclature note: it's **dBm** and **dBW** — not "dBmW."
 The **factor of 10** (rather than 20) is used here because we're taking the ratio of two *powers* directly.
 
 For instance, if the power is *10 times* the reference value (i.e., that sits at the denominator), then with this convention the converted power is 10.
-If it is *100 times* the reference value, the conventions says 20. If it's *0.1 times* then the convention says -10, or  *0.01 times* then the convention says -20.
+If it is *100 times* the reference value, the conventions says 20. If it's *0.1 times* then the convention says -10, or  *0.01 times* then the convention says -20. $0~dBm$ of course correspond exactly to the reference $1~mW$.
 
 
 
