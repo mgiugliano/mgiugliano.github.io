@@ -10,7 +10,7 @@ For a while, I relied every now and then on Poll Everywhere to engage students d
 
 I wanted something truly minimal and frictionless. No student accounts. No IP logging. No tracking. Just a simple QR code on a projector screen that students could scan to instantly vote. And most importantly, I wanted it deeply integrated into my presentation software of choice: Apple Keynote. I know that many other services exist but I wondered whether a truly free, open source, and self-hosted solution was possible.
 
-In fact, I quickly realized I didn't actually need a massive, database-heavy platform. So, with a bit of weekend coding (and major AI assistance!), I built **PollMe** from scratch and pushed it to [https://github.com/mgiugliano/pollMe](GitHub). 
+In fact, I quickly realized I didn't actually need a massive, database-heavy platform. So, with a bit of weekend coding (and major AI assistance!), I built **PollMe** from scratch and pushed it to [GitHub](https://github.com/mgiugliano/pollMe). 
 
 # A menu-bar utility that listens to Keynote
 

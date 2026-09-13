@@ -318,6 +318,37 @@ p {
   line-height: 1.65;
 }
 
+/* Images in post body. Pandoc wraps any image that's alone on its own
+   line in <figure>/<figcaption> automatically (using the alt text as the
+   caption) whenever it has non-empty alt text -- an image with no alt
+   text (e.g. the visitor badge) stays a plain <img>, unaffected here. */
+article img {
+  max-width: 100%;
+  height: auto;
+}
+
+article figure {
+  margin: 32px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-bg-secondary);
+  box-shadow: 0 4px 16px var(--color-shadow-subtle);
+}
+
+article figure img {
+  display: block;
+  width: 100%;
+}
+
+article figcaption {
+  padding: 10px 16px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-style: italic;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
 .date {
   color: var(--color-text-muted);
   font-size: 14px;

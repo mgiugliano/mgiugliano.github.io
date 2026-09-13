@@ -8,13 +8,13 @@ tags: contests, enjoyment, engineering, lifestyle
 
 # A Field Day on the Border: Friendship, Antennas, and Remembering to Enjoy Myself
 
-Last week I travel to Trieste for work and decided to stay one extra day for something purely for fun: a ham radio [https://www.darc.de/der-club/referate/conteste/iaru-region-1-fieldday/rules/](field day) with a small group of friends from the local radio club, right at the edge of Italy near the Slovenian border.
+Last week I travel to Trieste for work and decided to stay one extra day for something purely for fun: a ham radio [field day](https://www.darc.de/der-club/referate/conteste/iaru-region-1-fieldday/rules/) with a small group of friends from the local radio club, right at the edge of Italy near the Slovenian border.
 
 ## The setup
 
-Field days are European or even global contests, really more of an excuse than a competition in the strictest sense: the idea is to get as many radio contacts, or *QSOs*, as possible over a set period, log them, and submit the results. But for the handful of us who showed up, near the village of [https://it.wikipedia.org/wiki/Basovizza](Bazzoviza) on a beautiful stretch of coast overlooking the sea, the contest itself was almost beside the point.
+Field days are European or even global contests, really more of an excuse than a competition in the strictest sense: the idea is to get as many radio contacts, or *QSOs*, as possible over a set period, log them, and submit the results. But for the handful of us who showed up, near the village of [Bazzoviza](https://it.wikipedia.org/wiki/Basovizza) on a beautiful stretch of coast overlooking the sea, the contest itself was almost beside the point.
 
-I'm part of the committee of the [https://www.aritrieste.it/](Trieste section) of [https://www.ari.it/](ARI), the Italian amateur radio operators' association, even though I no longer live there. The section has somewhere around sixty or seventy members on paper, but only a small, dedicated core actually shows up to things like this. We were seven or eight people that morning, which turned out to be exactly the right number to appreciate the effort involved.
+I'm part of the committee of the [Trieste section](https://www.aritrieste.it/) of [ARI](https://www.ari.it/), the Italian amateur radio operators' association, even though I no longer live there. The section has somewhere around sixty or seventy members on paper, but only a small, dedicated core actually shows up to things like this. We were seven or eight people that morning, which turned out to be exactly the right number to appreciate the effort involved.
 
 ## Not just a hobby toy
 

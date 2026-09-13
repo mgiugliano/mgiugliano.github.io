@@ -6,7 +6,7 @@ tags: lifestyle, italy, scams
 
 # Booking Right, Getting Scammed Anyway: A Car Rental Cautionary Tale from Southern Italy
 
-For more than fifteen years I've booked rental cars through [https://www.autoeurope.com](AutoEurope), even before moving back to Italy. It's a broker that lets you compare providers and, crucially, lets you pre-pay for the "excess waiver" (*franchigia* in Italian) the deductible you'd otherwise owe out of pocket (sometimes 500 euros or more) if the car is damaged, has its windows broken, or is stolen, even when it's not your fault. Over the years this has consistently worked well for me.
+For more than fifteen years I've booked rental cars through [AutoEurope](https://www.autoeurope.com), even before moving back to Italy. It's a broker that lets you compare providers and, crucially, lets you pre-pay for the "excess waiver" (*franchigia* in Italian) the deductible you'd otherwise owe out of pocket (sometimes 500 euros or more) if the car is damaged, has its windows broken, or is stolen, even when it's not your fault. Over the years this has consistently worked well for me.
 
 This summer, renting a car in southern Italy through a local agency, that streak hit two rough patches. A quick note on the setup: I booked and paid for the rental remotely, in my own name, but I wasn't the one on-site. The person actually collecting and driving the car was an elderly family member of mine. That's relevant to what follows.
 

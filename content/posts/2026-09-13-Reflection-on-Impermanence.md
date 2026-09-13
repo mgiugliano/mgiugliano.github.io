@@ -10,7 +10,7 @@ tags: lifestyle, podcast, news
 
 # Losing Everything and yet live in the Present
 
-A few days ago I listened to a BBC World Service's interview with a man who had lost everything in the recent [https://en.wikipedia.org/wiki/2026_Nepal%E2%80%93Tibet_floods](floods) along the Nepal-Tibet border. He lost his house, his belongings, everything. And yet what he chose to say, what he offered as advice to others, was essentially: don't live in the future, don't hold too tightly to your possessions, be in the present, appreciate what you have now, because from one moment to the next, everything changes.
+A few days ago I listened to a BBC World Service's interview with a man who had lost everything in the recent [floods](https://en.wikipedia.org/wiki/2026_Nepal%E2%80%93Tibet_floods) along the Nepal-Tibet border. He lost his house, his belongings, everything. And yet what he chose to say, what he offered as advice to others, was essentially: don't live in the future, don't hold too tightly to your possessions, be in the present, appreciate what you have now, because from one moment to the next, everything changes.
 
 I found that remarkable. People have been saying some version of it for millennia, but I found it remarkable because of who was saying it, and when. This was not an offer of a comfortable philosophy from a position of safety and not even a message of despair. This came from someone who had just watched the truth of it happen to him and had come out the other side still willing to offer it as a gift to others rather than retreat into bitterness.
 
