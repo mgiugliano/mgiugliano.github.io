@@ -1,5 +1,5 @@
 ---
-title: Signal strengths in Engineering and HAM Radio
+title: Signal strengths in Engineering
 date: 2026-09-06
 tags: hobbies, engineering, radio, signals
 ---

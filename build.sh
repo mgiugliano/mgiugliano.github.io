@@ -288,16 +288,18 @@ with open('/tmp/activity-map-fragment.html', 'w', encoding='utf-8') as f:
 print(f"  Activity map: {min_year}-{max_year}")
 PYTHON_SCRIPT
 
-# Generate the post-card grid for the blog list page: a thumbnail (the
-# post's own image if it has one, otherwise a generated Catppuccin-accent
-# tile picked deterministically per post) + title + date + tags.
-echo "🎴 Generating post cards..."
+# Generate the post timeline for the blog list page: a vertical line with
+# year "chapter" markers, and one node per post (the post's own image if
+# it has one, otherwise a generated Catppuccin-accent dot picked
+# deterministically per post) + title + date + tags.
+echo "🕰️  Generating post timeline..."
 python3 << 'PYTHON_SCRIPT'
 import glob
 import hashlib
 import html
 import os
 import re
+from itertools import groupby
 
 CATPPUCCIN_ACCENTS = [
     "rosewater", "flamingo", "pink", "mauve", "red", "maroon", "peach",
@@ -320,7 +322,7 @@ def parse_front_matter(content):
             body = parts[2]
     return metadata, body
 
-def thumb_html_for(slug, metadata, body):
+def node_html_for(slug, metadata, body):
     src = metadata.get('thumbnail', '').strip()
     if not src:
         # Strip HTML comments first — otherwise the example image in
@@ -331,18 +333,18 @@ def thumb_html_for(slug, metadata, body):
         if m:
             src = m.group(1)
     if src:
-        return f'<div class="post-thumb"><img src="{html.escape(src)}" alt="" loading="lazy"></div>'
+        return f'<span class="timeline-node"><img src="{html.escape(src)}" alt="" loading="lazy"></span>'
     accent = accent_for(slug)
-    return f'<div class="post-thumb post-thumb-generated" data-accent="{accent}"></div>'
+    return f'<span class="timeline-node timeline-node-generated" data-accent="{accent}"></span>'
 
 def tags_html_for(metadata):
     tags = [t.strip() for t in metadata.get('tags', '').split(',') if t.strip()]
     if not tags:
         return ''
     spans = ''.join(f'<span class="tag-pill">{html.escape(t)}</span>' for t in tags)
-    return f'<div class="post-card-tags">{spans}</div>'
+    return f'<span class="timeline-tags">{spans}</span>'
 
-cards = []
+posts = []
 for filepath in sorted(glob.glob('content/posts/*.md'), reverse=True):
     slug = os.path.basename(filepath)[:-3]
     with open(filepath, encoding='utf-8') as f:
@@ -353,24 +355,31 @@ for filepath in sorted(glob.glob('content/posts/*.md'), reverse=True):
     if not d:
         m = re.match(r'^([0-9]{4}-[0-9]{2}-[0-9]{2})', slug)
         d = m.group(1) if m else ''
+    year = d.split('-')[0] if d else 'Undated'
+    posts.append((year, slug, title, d, metadata, body))
 
-    card = (
-        f'<a class="post-card" href="content/posts/{slug}.html">'
-        f'{thumb_html_for(slug, metadata, body)}'
-        f'<div class="post-card-body">'
-        f'<h2 class="post-card-title">{html.escape(title)}</h2>'
-        f'<p class="post-card-date">{html.escape(d)}</p>'
-        f'{tags_html_for(metadata)}'
-        f'</div></a>'
-    )
-    cards.append(card)
+parts = ['<div class="timeline">']
+for year, group in groupby(posts, key=lambda p: p[0]):
+    parts.append(f'<div class="timeline-year">{html.escape(year)}</div>')
+    for _, slug, title, d, metadata, body in group:
+        parts.append(
+            f'<a class="timeline-entry" href="content/posts/{slug}.html">'
+            f'{node_html_for(slug, metadata, body)}'
+            f'<span class="timeline-title-row">'
+            f'<span class="timeline-title">{html.escape(title)}</span>'
+            f'<span class="timeline-date">{html.escape(d)}</span>'
+            f'</span>'
+            f'{tags_html_for(metadata)}'
+            f'</a>'
+        )
+parts.append('</div>')
 
-fragment = '<div class="post-card-grid">' + ''.join(cards) + '</div>' if cards else ''
+fragment = ''.join(parts) if posts else ''
 
-with open('/tmp/post-cards-fragment.html', 'w', encoding='utf-8') as f:
+with open('/tmp/post-timeline-fragment.html', 'w', encoding='utf-8') as f:
     f.write(fragment)
 
-print(f"  Generated {len(cards)} post card(s)")
+print(f"  Generated timeline with {len(posts)} post(s)")
 PYTHON_SCRIPT
 
 # Generate blog index page
@@ -386,19 +395,19 @@ title: Blog
 
 <!-- ACTIVITY_MAP -->
 
-<!-- POST_CARDS -->
+<!-- POST_TIMELINE -->
 EOF
 
-# Inject the activity map and post-card fragments
+# Inject the activity map and post-timeline fragments
 python3 -c "
 with open('/tmp/blog-list.md', 'r') as f:
     content = f.read()
 with open('/tmp/activity-map-fragment.html', 'r') as f:
     activity_map = f.read()
-with open('/tmp/post-cards-fragment.html', 'r') as f:
-    post_cards = f.read()
+with open('/tmp/post-timeline-fragment.html', 'r') as f:
+    post_timeline = f.read()
 content = content.replace('<!-- ACTIVITY_MAP -->', activity_map)
-content = content.replace('<!-- POST_CARDS -->', post_cards)
+content = content.replace('<!-- POST_TIMELINE -->', post_timeline)
 with open('/tmp/blog-list.md', 'w') as f:
     f.write(content)
 "

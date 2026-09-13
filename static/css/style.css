@@ -90,7 +90,7 @@ body {
    functional contrast against serif reading content */
 nav, .search-container, .theme-toggle, .nav-links,
 .date, .post-nav, .feed-link, footer,
-.tag-pill, .post-card-tags, .post-card-date, .thumbnail-credit {
+.tag-pill, .timeline-tags, .timeline-date, .thumbnail-credit {
   font-family: var(--font-ui);
 }
 
@@ -543,89 +543,130 @@ li {
   color: var(--color-accent);
 }
 
-/* Post card grid (blog list) */
-.post-card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
-  margin: 24px 0;
+/* Post timeline (blog list): a vertical line with year "chapter" markers
+   and one node per post — the post's own image if it has one, otherwise a
+   generated Catppuccin accent dot (Latte in light mode, Mocha in dark)
+   picked deterministically per post so it stays stable across rebuilds. */
+.timeline {
+  position: relative;
+  margin: 28px 0;
+  padding-left: 44px;
 }
 
-.post-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: 16px;
-  overflow: hidden;
-  background: var(--color-bg-secondary);
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 10px;
+  left: 15px;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.timeline-year {
+  position: relative;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-text);
+  margin: 30px 0 14px -44px;
+  padding-left: 44px;
+}
+
+.timeline-year:first-child {
+  margin-top: 0;
+}
+
+.timeline-year::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-bg);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.timeline-entry {
+  position: relative;
+  display: block;
+  margin: 0 0 20px -44px;
+  padding: 6px 14px 6px 44px;
+  border-radius: 12px;
   color: var(--color-text);
   text-decoration: none;
   background-image: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
-.post-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px var(--color-shadow), 0 0 0 1px var(--color-accent-shadow);
+.timeline-entry:hover {
+  background: var(--color-bg-secondary);
 }
 
-.post-thumb {
-  aspect-ratio: 16 / 9;
+.timeline-entry:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-node {
+  position: absolute;
+  left: 3px;
+  top: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
   overflow: hidden;
+  border: 2px solid var(--color-bg);
+  box-shadow: 0 0 0 1px var(--color-border);
 }
 
-.post-thumb img {
+.timeline-node img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-/* Generated placeholder tile for posts with no image of their own —
-   a Catppuccin accent (Latte in light mode, Mocha in dark), picked
-   deterministically per post so it stays stable across rebuilds. */
-.post-thumb-generated {
-  background: linear-gradient(135deg, var(--tile-accent), color-mix(in srgb, var(--tile-accent) 35%, var(--color-bg-secondary)));
-}
+.timeline-node-generated { background: var(--tile-accent); }
+.timeline-node-generated[data-accent="rosewater"] { --tile-accent: var(--cat-rosewater); }
+.timeline-node-generated[data-accent="flamingo"]  { --tile-accent: var(--cat-flamingo); }
+.timeline-node-generated[data-accent="pink"]      { --tile-accent: var(--cat-pink); }
+.timeline-node-generated[data-accent="mauve"]     { --tile-accent: var(--cat-mauve); }
+.timeline-node-generated[data-accent="red"]       { --tile-accent: var(--cat-red); }
+.timeline-node-generated[data-accent="maroon"]    { --tile-accent: var(--cat-maroon); }
+.timeline-node-generated[data-accent="peach"]     { --tile-accent: var(--cat-peach); }
+.timeline-node-generated[data-accent="yellow"]    { --tile-accent: var(--cat-yellow); }
+.timeline-node-generated[data-accent="green"]     { --tile-accent: var(--cat-green); }
+.timeline-node-generated[data-accent="teal"]      { --tile-accent: var(--cat-teal); }
+.timeline-node-generated[data-accent="sky"]       { --tile-accent: var(--cat-sky); }
+.timeline-node-generated[data-accent="sapphire"]  { --tile-accent: var(--cat-sapphire); }
+.timeline-node-generated[data-accent="blue"]      { --tile-accent: var(--cat-blue); }
+.timeline-node-generated[data-accent="lavender"]  { --tile-accent: var(--cat-lavender); }
 
-.post-thumb-generated[data-accent="rosewater"] { --tile-accent: var(--cat-rosewater); }
-.post-thumb-generated[data-accent="flamingo"]  { --tile-accent: var(--cat-flamingo); }
-.post-thumb-generated[data-accent="pink"]      { --tile-accent: var(--cat-pink); }
-.post-thumb-generated[data-accent="mauve"]     { --tile-accent: var(--cat-mauve); }
-.post-thumb-generated[data-accent="red"]       { --tile-accent: var(--cat-red); }
-.post-thumb-generated[data-accent="maroon"]    { --tile-accent: var(--cat-maroon); }
-.post-thumb-generated[data-accent="peach"]     { --tile-accent: var(--cat-peach); }
-.post-thumb-generated[data-accent="yellow"]    { --tile-accent: var(--cat-yellow); }
-.post-thumb-generated[data-accent="green"]     { --tile-accent: var(--cat-green); }
-.post-thumb-generated[data-accent="teal"]      { --tile-accent: var(--cat-teal); }
-.post-thumb-generated[data-accent="sky"]       { --tile-accent: var(--cat-sky); }
-.post-thumb-generated[data-accent="sapphire"]  { --tile-accent: var(--cat-sapphire); }
-.post-thumb-generated[data-accent="blue"]      { --tile-accent: var(--cat-blue); }
-.post-thumb-generated[data-accent="lavender"]  { --tile-accent: var(--cat-lavender); }
-
-.post-card-body {
-  padding: 16px 18px 18px;
+.timeline-title-row {
   display: flex;
-  flex-direction: column;
-  flex: 1;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
 }
 
-.post-card-title {
-  font-size: 1.125rem;
+.timeline-title {
+  font-family: var(--font-heading);
   font-weight: 700;
-  margin: 0 0 6px;
-  line-height: 1.3;
-  border-bottom: none;
-  padding-bottom: 0;
+  font-size: 1.0625rem;
 }
 
-.post-card-date {
+.timeline-date {
   font-size: 12px;
   color: var(--color-text-muted);
-  margin: 0 0 10px;
+  white-space: nowrap;
 }
 
-.post-card-tags {
-  margin-top: auto;
+.timeline-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
