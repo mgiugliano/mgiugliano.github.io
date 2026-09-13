@@ -1,7 +1,7 @@
 ---
 title: Quick notes
 date: 2024-04-17
-tags: productivity, macos
+tags: automation, coding, macos, productivity
 ---
 
 ![Hammerspoon](/static/images/hammerspoon.jpeg)

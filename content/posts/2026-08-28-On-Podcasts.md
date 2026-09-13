@@ -1,7 +1,7 @@
 ---
 title: On Podcasts
 date: 2026-08-28
-tags: podcasts, hobbies, news 
+tags: automation, coding, hobbies, news, podcast
 ---
 
 ![Podcasts](/static/images/podcasts.jpeg)
