@@ -1,7 +1,7 @@
 ---
 title: Field Day in Basovizza
-date: 2026-09-13
-tags: contests, enjoyment, engineering, lifestyle
+date: 2026-09-05
+tags: contests, enjoyment, learning, lifestyle, radio
 ---
 
 ![Basovizza, 2026](/static/images/fieldday_Sep2026.png)

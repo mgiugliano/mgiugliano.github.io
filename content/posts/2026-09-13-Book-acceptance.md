@@ -1,7 +1,7 @@
 ---
 title: Book acceptance
-date: 2026-09-13
-tags: neurotechnology, brain-computer interfaces, science, engineering, learning
+date: 2026-09-09
+tags: neurotechnology, brain-computer interfaces, science, engineering
 ---
 
 ![Book accepted!](/static/images/book_cover.png)

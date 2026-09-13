@@ -1,7 +1,7 @@
 ---
 title: Car rental scam in Italy
-date: 2026-09-13
-tags: lifestyle, italy, scams
+date: 2026-09-10
+tags: scams, italy, rental, car, fraud, insurance, agency, family, elderly, protection, safety, travel
 ---
 
 # Booking Right, Getting Scammed Anyway: A Car Rental Cautionary Tale from Southern Italy
